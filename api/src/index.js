@@ -1,1 +1,1 @@
-require ('event_segmentation_sql_generator')
+require('event_segmentation_sql_generator');
