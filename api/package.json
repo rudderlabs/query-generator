@@ -1,0 +1,31 @@
+{
+  "name": "query-generator",
+  "version": "1.0.0",
+  "description": "RudderStack query generator poc",
+  "main": "src/event_segmentation_sql_generator.js",
+  "scripts": {
+    "start": "node src/event_segmentation_sql_generator.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rudderlabs/query-generator.git"
+  },
+  "author": "RudderStack",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rudderlabs/query-generator/issues"
+  },
+  "homepage": "https://github.com/rudderlabs/query-generator#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "snowflake-sdk": "^1.5.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  }
+}
