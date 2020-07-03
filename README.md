@@ -6,4 +6,4 @@
 cd api; npm start
 ```
 
-All the sample JSON files are under `src/data`
+All the sample JSON files are under `api/data`
