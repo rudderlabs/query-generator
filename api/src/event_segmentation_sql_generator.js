@@ -1,5 +1,6 @@
 const fs = require('fs');
 const express = require('express');
+const cors = require('cors')
 const bodyParser = require('body-parser');
 const snowflake = require('snowflake-sdk');
 
@@ -120,11 +121,13 @@ if (process.argv.length < 3){
 }
 */
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const app = express();
 
 app.use(bodyParser.json({ type: 'application/json' }));
+
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.status(404).send('GET Not Supported');
