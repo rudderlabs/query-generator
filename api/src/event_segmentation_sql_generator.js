@@ -462,7 +462,7 @@ app.post('/geteventpropertyvalues', (req, res) => {
 
   const connection = getConnection(queryInput);
 
-  const query = `select distinct(${columnName}) from ${tableName} limit 100 `;
+  const query = `select distinct(${columnName}) from ${tableName} limit 500 `;
 
   // Try to connect to Snowflake, and check whether the connection was successful.
   connection.connect((err, conn) => {
