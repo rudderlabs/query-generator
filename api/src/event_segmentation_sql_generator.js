@@ -204,10 +204,10 @@ app.post('/getquery', (req, res) => {
       }
 
       // there will always be group by time field
-      let groupByClause = ' group by sent_at ';
+      let groupByClause = ' group by day ';
 
       eventQuery += `${tableAlias} as ( `;
-      let singleQuery = 'select count(*) as event_count, cast(sent_at as timestamp) as sent_at ';
+      let singleQuery = 'select count(*) as event_count, cast(original_timestamp as date) as day ';
       // add the group by columns in select and also construct the group by clause
       if (
         queryInput.events[index].group_by
