@@ -4,7 +4,7 @@
 	"host": "torpedo-cluster.cqbi47bgz1hk.us-east-1.redshift.amazonaws.com",
 	"port": 5439,
 	"username": "awsuser",
-	"password": "TopSecret123"
+	"password": ""
 }
 				
 	
