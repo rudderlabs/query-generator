@@ -497,6 +497,109 @@ app.post('/geteventpropertyvalues', (req, res) => {
   });
 });
 
+
+//work-in-progress. do not invoke
+app.post('/getfunnelquery', (req,res) => {
+	
+	try {
+		var queryInput = req.body;
+	} catch (error) {
+		console.log(`Error parsing query input JSON\n${error}`);
+	}
+
+	// extract prefix to be used for all tables
+	if (!(queryInput.database && queryInput.schema)) {
+		throw 'Database or schema information missing in input JSON';
+	}
+	
+	const prefix = `${queryInput.database}.${queryInput.schema}.`;
+
+	const usersTable = `${prefix}users`;
+
+	// construct the user_id query portion. It will be common to all event retrieval subqueries
+
+	if (queryInput.user_filter && queryInput.user_filter.length > 0) {
+		var userQuery = `select id from ${usersTable} where `;
+
+		try {
+			userQuery += ` ${constructWhere(queryInput.user_filter)}`;
+		} catch (error) {
+			console.log(error);
+		}	
+	}
+	
+	if (queryInput.user_filter && queryInput.user_filter.length > 0) {
+		var userQuery = `select id from ${usersTable} where `;
+
+		try {
+			userQuery += ` ${constructWhere(queryInput.user_filter)}`;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	if(!(queryInput.event_sequence)){
+		throw 'Event sequence missing in input JSON';
+	}
+	
+	
+
+
+	baseQuery = ` with base_table as (select event, user_id, timestamp, rank() over (partition by user_id order by timestamp asc) as rank from ${prefix}tracks `;
+	baseQuery += ` where event in ( `;
+	for(var i=0; i < queryInput.event_sequence.length; i++){
+		if (i>0) { //add comma
+			baseQuery += `,`;
+		}
+		baseQuery += `'${queryInput.event_sequence[i].name}'`;
+		
+	}
+	baseQuery += ` ) `;
+	
+	if (queryInput.time_filter && queryInput.time_filter.start && queryInput.time_filter.end) { //time filter is present
+		baseQuery += ` and timestamp >= to_timestamp('${queryInput.time_filter.start}','YYYY-MM-DD') and timestamp <= to_timestamp('${queryInput.time_filter.end}','YYYY-MM-DD') `;
+	}
+
+	// add user filter if specified
+	if (userQuery && userQuery.length > 0) {
+		baseQuery += ` and user_id in ( ${userQuery} ) `;
+	}
+	
+	baseQuery += ` ) `
+	
+	var queryList = new Array();
+	var query = '';
+	//iterate through the event sequence
+	for(var i=0; i < queryInput.event_sequence.length; i++){
+		
+		
+		if (i>0) {
+			query = ` select user_id from base_table where rank = 1 and event = '${queryInput.event_sequence[i].name}' `;
+			for (var j=0; j<=i; j++) { //inner loop
+				var rankVal = j+1; //rank starts from 1
+				if (j>0) { //add and
+					query += ` intersect (select user_id from base_table where  `;
+					query += ` rank = ${rankVal} and event = '${queryInput.event_sequence[j].name}' `
+					query += ` ) `
+				}
+				
+			}
+			queryList.push(baseQuery + ' ' + query);
+			
+		} else {
+			
+			query = ` select user_id from base_table where rank = 1 and event = '${queryInput.event_sequence[i].name}' `;
+			queryList.push(baseQuery + ' ' + query);
+			
+		}
+		
+		
+	}
+	
+	res.json(queryList);
+
+});
+
 app.listen(port, () => {
   console.log('Server listening on port ', port);
 });
