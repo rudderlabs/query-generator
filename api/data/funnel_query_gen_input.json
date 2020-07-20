@@ -1,0 +1,28 @@
+{
+  "database": "rudder_webapp_data",
+  "schema": "rudderwebapp",
+  "event_sequence": [
+    {
+		"name": "user_signed_up"
+    },
+    {
+		"name": "user_logged_in"
+    },
+	{
+		"name": "destination_clicked"
+	}
+  ],
+  "time_filter": {
+		"start": "2020-04-01",
+		"end": "2020-07-20"
+  },
+  "user_filter": [
+    {
+		"field": "email",
+		"type": "string",
+		"operator": "does_not_contain",
+		"target_value": "rudderlabs"
+    }
+  ]
+}
+
