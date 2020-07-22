@@ -498,7 +498,7 @@ app.post('/geteventpropertyvalues', (req, res) => {
 });
 
 
-//work-in-progress. do not invoke
+
 app.post('/getfunnelquery', (req,res) => {
 	
 	try {
@@ -599,6 +599,104 @@ app.post('/getfunnelquery', (req,res) => {
 	res.json(queryList);
 
 });
+
+
+//work in progress. do not invoke
+app.post('/getcohortquery', (req,res) => {
+	
+	try {
+		var queryInput = req.body;
+	} catch (error) {
+		console.log(`Error parsing query input JSON\n${error}`);
+	}
+
+	// extract prefix to be used for all tables
+	if (!(queryInput.database && queryInput.schema)) {
+		throw 'Database or schema information missing in input JSON';
+	}
+	
+	const prefix = `${queryInput.database}.${queryInput.schema}.`;
+	
+	
+	if(!(queryInput.action_filters && (queryInput.action_filters.length > 0))){
+		throw 'Missing or empty action_filters in input JSON';
+	}
+	
+	var query = ``;
+	for(var i=0; i < queryInput.action_filters.length; i++){ //iterate through action_filters
+	
+		//keep the time_filter constructed
+		var timeFilterPart = ``;
+		if (queryInput.action_filters[i].time_filter && queryInput.action_filters[i].time_filter.start && queryInput.action_filters[i].time_filter.end){
+			timeFilterPart += ` where timestamp >= to_timestamp('${queryInput.action_filters[i].time_filter.start}','YYYY-MM-DD') `;
+			timeFilterPart += ` and timestamp <= to_timestamp('${queryInput.action_filters[i].time_filter.end}','YYYY-MM-DD') `;
+		}	
+
+		
+		//add suitable enclosure for conjunctions
+		if(queryInput.action_filters[i] ===  "and"){
+			query += ` intersect ( `;
+		}
+
+		if(queryInput.action_filters[i] ===  "or"){
+			query += ` union ( `;
+		}
+		
+
+
+		//check that comparison_type exists and is valid
+		if (!(queryInput.action_filters[i].comparison_type 
+			&& (queryInput.action_filters[i].comparison_type === "count" 
+				|| queryInput.action_filters[i].comparison_type === "relative_count"
+				|| queryInput.action_filters[i].comparison_type === "total_sum_of_property")
+			)
+		) {
+			throw `Missing or invalid comparison_type for action_filters[${i}]`;
+		}
+
+		if(!(queryInput.action_filters[i].comparison_operator && queryInput.action_filters[i].comparison_value)){
+			throw `Comparison Operator and/or Comparison Value missing in action_filters[${i}]`;
+		}
+
+		
+		if(queryInput.action_filters[i].comparison_type === "count"){
+			
+			query += ` with table_${i} as ( select user_id, count(*) as count from ${prefix}tracks `;
+			if(timeFilterPart && (timeFilterPart.length > 0)) { //there is a time filter
+				query += timeFilterPart;
+			}
+			query += ` group by user_id ) `;
+			query += ` select user_id from table_${i} where count ${queryInput.action_filters[i].comparison_operator} ${queryInput.action_filters[i].comparison_value} `;
+			
+		} else if(queryInput.action_filters[i].comparison_type === "relative_count") {
+			query += ` with table_${i}_0 as ( select user_id, count(*) as count from ${prefix}tracks `;
+			if(timeFilterPart && (timeFilterPart.length > 0)) { //there is a time filter
+				query += timeFilterPart;
+			}
+			query += ` group by user_id ), `;
+			
+			query += ` table_${i}_1 as ( select user_id, count(*) as count from ${prefix}tracks `;
+			if(timeFilterPart && (timeFilterPart.length > 0)) { //there is a time filter
+				query += timeFilterPart;
+			}
+			query += ` group by user_id ) `;
+			query += ` select table_${i}_0.user_id from table_${i}_0, table_${i}_1 where table_${i}_0.user_id = table_${i}_1.user_id and table_${i}_0.count ${queryInput.action_filters[i].comparison_operator} table_${i}_1.count `	
+		} else if(queryInput.action_filters[i].comparison_type === "total_sum_of_property") {
+		}
+		
+		
+		
+		if(queryInput.action_filters[i] ===  "and" || queryInput.action_filters[i] ===  "or"){
+			query += ` ) `;
+		}
+		
+		
+	}
+	res.json(query);
+
+});
+
+
 
 app.listen(port, () => {
   console.log('Server listening on port ', port);
