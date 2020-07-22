@@ -705,7 +705,20 @@ app.post('/getcohortquery', (req,res) => {
 			query += ` group by user_id ) `;
 			query += ` select user_id from table_${i} where total_sum_of_property ${queryInput.action_filters[i].comparison_operator} ${queryInput.action_filters[i].comparison_value.sum} `;
 
+		} else if(queryInput.action_filters[i].comparison_type === "distinct_values_of_property") {
 			
+			if(!(queryInput.action_filters[i].comparison_value.property && queryInput.action_filters[i].comparison_value.distinct)){
+				
+				throw `Property name and/or distinct count missing for action_filters[${i}]`;
+			}
+
+			query += ` with table_${i} as ( select user_id, count(distinct(${queryInput.action_filters[i].comparison_value.property})) as distinct_values_of_property from ${prefix}${queryInput.action_filters[i].event} `;
+			if(timeFilterPart && (timeFilterPart.length > 0)) { //there is a time filter
+				query += ` where ` + timeFilterPart.split("and")[1] + ` and ` + timeFilterPart.split("and")[2]; //need this logic to strip leading where
+			}
+			query += ` group by user_id ) `;
+			query += ` select user_id from table_${i} where distinct_values_of_property ${queryInput.action_filters[i].comparison_operator} ${queryInput.action_filters[i].comparison_value.distinct} `;
+
 		}
 		
 		
