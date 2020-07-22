@@ -625,20 +625,24 @@ app.post('/getcohortquery', (req,res) => {
 	var query = ``;
 	for(var i=0; i < queryInput.action_filters.length; i++){ //iterate through action_filters
 	
+		if(i>0 && (!queryInput.action_filters[i].conjunction)){
+			throw `Conjunction missing for action_filters[${i}]`;
+		}
+	
 		//keep the time_filter constructed
 		var timeFilterPart = ``;
 		if (queryInput.action_filters[i].time_filter && queryInput.action_filters[i].time_filter.start && queryInput.action_filters[i].time_filter.end){
-			timeFilterPart += ` where timestamp >= to_timestamp('${queryInput.action_filters[i].time_filter.start}','YYYY-MM-DD') `;
+			timeFilterPart += ` and timestamp >= to_timestamp('${queryInput.action_filters[i].time_filter.start}','YYYY-MM-DD') `;
 			timeFilterPart += ` and timestamp <= to_timestamp('${queryInput.action_filters[i].time_filter.end}','YYYY-MM-DD') `;
 		}	
 
 		
 		//add suitable enclosure for conjunctions
-		if(queryInput.action_filters[i] ===  "and"){
+		if(queryInput.action_filters[i].conjunction ===  "and"){
 			query += ` intersect ( `;
 		}
 
-		if(queryInput.action_filters[i] ===  "or"){
+		if(queryInput.action_filters[i].conjunction ===  "or"){
 			query += ` union ( `;
 		}
 		
@@ -648,7 +652,8 @@ app.post('/getcohortquery', (req,res) => {
 		if (!(queryInput.action_filters[i].comparison_type 
 			&& (queryInput.action_filters[i].comparison_type === "count" 
 				|| queryInput.action_filters[i].comparison_type === "relative_count"
-				|| queryInput.action_filters[i].comparison_type === "total_sum_of_property")
+				|| queryInput.action_filters[i].comparison_type === "total_sum_of_property"
+				|| queryInput.action_filters[i].comparison_type === "distinct_values_of_property")
 			)
 		) {
 			throw `Missing or invalid comparison_type for action_filters[${i}]`;
@@ -661,7 +666,7 @@ app.post('/getcohortquery', (req,res) => {
 		
 		if(queryInput.action_filters[i].comparison_type === "count"){
 			
-			query += ` with table_${i} as ( select user_id, count(*) as count from ${prefix}tracks `;
+			query += ` with table_${i} as ( select user_id, count(*) as count from ${prefix}tracks where event = '${queryInput.action_filters[i].event}'`;
 			if(timeFilterPart && (timeFilterPart.length > 0)) { //there is a time filter
 				query += timeFilterPart;
 			}
@@ -669,24 +674,43 @@ app.post('/getcohortquery', (req,res) => {
 			query += ` select user_id from table_${i} where count ${queryInput.action_filters[i].comparison_operator} ${queryInput.action_filters[i].comparison_value} `;
 			
 		} else if(queryInput.action_filters[i].comparison_type === "relative_count") {
-			query += ` with table_${i}_0 as ( select user_id, count(*) as count from ${prefix}tracks `;
+			
+			if(!(queryInput.action_filters[i].comparison_value.event)){
+				throw `Comparison event missing in action_filters[${i}]`;
+			}
+			
+			query += ` with table_${i}_0 as ( select user_id, count(*) as count from ${prefix}tracks where event = '${queryInput.action_filters[i].event}' `;
 			if(timeFilterPart && (timeFilterPart.length > 0)) { //there is a time filter
 				query += timeFilterPart;
 			}
 			query += ` group by user_id ), `;
 			
-			query += ` table_${i}_1 as ( select user_id, count(*) as count from ${prefix}tracks `;
+			query += ` table_${i}_1 as ( select user_id, count(*) as count from ${prefix}tracks where event = '${queryInput.action_filters[i].comparison_value.event}'`;
 			if(timeFilterPart && (timeFilterPart.length > 0)) { //there is a time filter
 				query += timeFilterPart;
 			}
 			query += ` group by user_id ) `;
 			query += ` select table_${i}_0.user_id from table_${i}_0, table_${i}_1 where table_${i}_0.user_id = table_${i}_1.user_id and table_${i}_0.count ${queryInput.action_filters[i].comparison_operator} table_${i}_1.count `	
 		} else if(queryInput.action_filters[i].comparison_type === "total_sum_of_property") {
+			
+			if(!(queryInput.action_filters[i].comparison_value.property && queryInput.action_filters[i].comparison_value.sum)){
+				
+				throw `Property name and/or sum missing for action_filters[${i}]`;
+			}
+
+			query += ` with table_${i} as ( select user_id, sum(${queryInput.action_filters[i].comparison_value.property}) as total_sum_of_property from ${prefix}${queryInput.action_filters[i].event} `;
+			if(timeFilterPart && (timeFilterPart.length > 0)) { //there is a time filter
+				query += ` where ` + timeFilterPart.split("and")[1] + ` and ` + timeFilterPart.split("and")[2]; //need this logic to strip leading where
+			}
+			query += ` group by user_id ) `;
+			query += ` select user_id from table_${i} where total_sum_of_property ${queryInput.action_filters[i].comparison_operator} ${queryInput.action_filters[i].comparison_value.sum} `;
+
+			
 		}
 		
 		
 		
-		if(queryInput.action_filters[i] ===  "and" || queryInput.action_filters[i] ===  "or"){
+		if(queryInput.action_filters[i].conjunction ===  "and" || queryInput.action_filters[i].conjunction ===  "or"){
 			query += ` ) `;
 		}
 		

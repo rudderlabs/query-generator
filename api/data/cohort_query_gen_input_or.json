@@ -1,0 +1,30 @@
+{
+  "database": "rudder_webapp_data",
+  "schema": "rudderwebapp",
+  "action_filters": [
+    {
+		"event": "user_logged_in",
+		"comparison_type": "count",
+		"comparison_operator": ">",
+		"comparison_value":  5,
+		"time_filter": {
+			"start": "2020-04-01",
+			"end": "2020-07-20"
+		}
+    },
+    {
+		"conjunction": "or",
+		"event": "user_signed_up",
+		"comparison_type": "relative_count",
+		"comparison_operator": ">",
+		"comparison_value":  {
+			"event": "user_logged_in"
+		},
+		"time_filter": {
+			"start": "2020-04-01",
+			"end": "2020-07-20"
+		}
+    }
+  ]
+}
+
