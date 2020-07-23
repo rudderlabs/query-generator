@@ -1,0 +1,14 @@
+{
+  "database": "rudder_webapp_data",
+  "schema": "rudderwebapp",
+  "action_filters": [
+    {
+		"event": "destination_clicked",
+		"comparison_type": "count_within_first_use",
+		"comparison_operator": "<",
+		"comparison_value":  5,
+		"within": 10
+    }
+  ]
+}
+

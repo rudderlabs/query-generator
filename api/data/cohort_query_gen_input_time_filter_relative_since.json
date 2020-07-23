@@ -1,0 +1,31 @@
+{
+  "database": "rudder_webapp_data",
+  "schema": "rudderwebapp",
+  "action_filters": [
+    {
+		"event": "user_logged_in",
+		"comparison_type": "count",
+		"comparison_operator": ">",
+		"comparison_value":  5,
+		"time_filter": {
+			"type": "relative_since",
+			"since": "2020-05-01"
+		}
+    },
+    {
+		"conjunction": "and",
+		"event": "user_logged_in",
+		"comparison_type": "distinct_values_of_property",
+		"comparison_operator": ">",
+		"comparison_value":  {
+			"property": "context_useragent",
+			"distinct": 3
+		},
+		"time_filter": {
+			"type": "relative_since",
+			"since": "2020-05-01"
+		}
+    }
+  ]
+}
+
