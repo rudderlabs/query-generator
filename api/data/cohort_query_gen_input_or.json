@@ -21,6 +21,7 @@
 			"event": "user_logged_in"
 		},
 		"time_filter": {
+			"type": "absolute",
 			"start": "2020-04-01",
 			"end": "2020-07-20"
 		}

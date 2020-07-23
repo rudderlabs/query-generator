@@ -8,6 +8,7 @@
 		"comparison_operator": ">",
 		"comparison_value":  5,
 		"time_filter": {
+			"type": "absolute",
 			"start": "2020-04-01",
 			"end": "2020-07-20"
 		}

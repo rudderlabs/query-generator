@@ -137,7 +137,7 @@ app.post('/', (req, res) => {
   res
     .status(404)
     .send(
-      'Please use one of endpoints - /getquery, /getevents, /geteventproperties, /geteventpropertyvalues',
+      'Please use one of endpoints - /getquery, /getevents, /geteventproperties, /geteventpropertyvalues, /getfunnelquery, /getcohortquery',
     );
 });
 
@@ -625,16 +625,44 @@ app.post('/getcohortquery', (req,res) => {
 	var query = ``;
 	for(var i=0; i < queryInput.action_filters.length; i++){ //iterate through action_filters
 	
+		if(!queryInput.action_filters[i].event){
+			throw `Event missing for action_filters[${i}]`;
+		}
+	
 		if(i>0 && (!queryInput.action_filters[i].conjunction)){
 			throw `Conjunction missing for action_filters[${i}]`;
 		}
 	
 		//keep the time_filter constructed
 		var timeFilterPart = ``;
-		if (queryInput.action_filters[i].time_filter && queryInput.action_filters[i].time_filter.start && queryInput.action_filters[i].time_filter.end){
-			timeFilterPart += ` and timestamp >= to_timestamp('${queryInput.action_filters[i].time_filter.start}','YYYY-MM-DD') `;
-			timeFilterPart += ` and timestamp <= to_timestamp('${queryInput.action_filters[i].time_filter.end}','YYYY-MM-DD') `;
-		}	
+		if(queryInput.action_filters[i].time_filter && (!queryInput.action_filters[i].time_filter.type)){
+			throw `Type not specified for time filter for action_filters[${i}]`;
+		} else if(queryInput.action_filters[i].time_filter && queryInput.action_filters[i].time_filter.type) {
+			if(queryInput.action_filters[i].time_filter.type === "absolute"){
+				if (!(queryInput.action_filters[i].time_filter.start && queryInput.action_filters[i].time_filter.end)){
+					throw `Start and/or End missing for 'absolute' time filter in action_filters[${i}]`;
+				}	
+				
+				timeFilterPart += ` and timestamp >= to_timestamp('${queryInput.action_filters[i].time_filter.start}','YYYY-MM-DD') `;
+				timeFilterPart += ` and timestamp <= to_timestamp('${queryInput.action_filters[i].time_filter.end}','YYYY-MM-DD') `;
+				
+			} else if(queryInput.action_filters[i].time_filter.type === "relative_previous"){
+				if (!(queryInput.action_filters[i].time_filter.days)){
+					throw `Days missing for 'relative_previous' time filter in action_filters[${i}]`;
+				}
+				
+				timeFilterPart += ` and timestamp >= dateadd(day,(0-${queryInput.action_filters[i].time_filter.days}),current_date()) `;
+				timeFilterPart += ` and timestamp <= current_date() `;
+				
+			} else if(queryInput.action_filters[i].time_filter.type === "relative_since"){
+				if (!(queryInput.action_filters[i].time_filter.since)){
+					throw `Since date missing for 'absolute_since' time filter in action_filters[${i}]`;
+				}
+				
+				timeFilterPart += ` and timestamp >= to_timestamp('${queryInput.action_filters[i].time_filter.since}','YYYY-MM-DD') `;
+				timeFilterPart += ` and timestamp <= current_date() `;	
+			}
+		}
 
 		
 		//add suitable enclosure for conjunctions
@@ -653,7 +681,8 @@ app.post('/getcohortquery', (req,res) => {
 			&& (queryInput.action_filters[i].comparison_type === "count" 
 				|| queryInput.action_filters[i].comparison_type === "relative_count"
 				|| queryInput.action_filters[i].comparison_type === "total_sum_of_property"
-				|| queryInput.action_filters[i].comparison_type === "distinct_values_of_property")
+				|| queryInput.action_filters[i].comparison_type === "distinct_values_of_property"
+				|| queryInput.action_filters[i].comparison_type === "count_within_first_use")
 			)
 		) {
 			throw `Missing or invalid comparison_type for action_filters[${i}]`;
@@ -718,7 +747,21 @@ app.post('/getcohortquery', (req,res) => {
 			}
 			query += ` group by user_id ) `;
 			query += ` select user_id from table_${i} where distinct_values_of_property ${queryInput.action_filters[i].comparison_operator} ${queryInput.action_filters[i].comparison_value.distinct} `;
-
+ 
+		} else if(queryInput.action_filters[i].comparison_type === "count_within_first_use") {
+			
+			if(!queryInput.action_filters[i].within){
+				throw `Within value missing in action_filters[${i}]`;
+			}
+			
+			query += ` with base_table_1 as (select user_id, min(timestamp) as first_use_timestamp from ${prefix}tracks group by user_id), `
+			query += ` base_table_2 as (select a.user_id, count(*) as event_count from ${prefix}tracks a, base_table_1 `; 
+			query += ` where a.event = '${queryInput.action_filters[i].event}' `;
+			query += ` and a.user_id = base_table_1.user_id `;
+			query += ` and a.timestamp >= base_table_1.first_use_timestamp `;
+			query += ` and a.timestamp <= dateadd(day,${queryInput.action_filters[i].within},base_table_1.first_use_timestamp) `;
+            query += ` group by a.user_id) `;
+			query += ` select user_id from base_table_2 where event_count ${queryInput.action_filters[i].comparison_operator} ${queryInput.action_filters[i].comparison_value} `;
 		}
 		
 		
