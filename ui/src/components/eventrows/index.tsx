@@ -12,12 +12,14 @@ import { IEvent } from "../../models/event";
 import { eventNames } from "cluster";
 import { WhereClauseRow } from "../whereclause";
 import { GroupClauseRow } from "../groupclause";
-import { DeleteFilled, CaretDownFilled } from "@ant-design/icons";
+import { DeleteFilled, CaretDownFilled, CaretDownOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
-export const StyledEventSelect = styled(Select)`
-margin-top: 10px;
-margin-left: 10px
+export const StyledEventSelect = styled(Select)<any>`
+&&& {
+  margin-top: 10px;
+  margin-left: 10px;
+}
 `
 
 // margin-left: 0 ;
@@ -230,9 +232,8 @@ export class EventRow extends React.Component<IEventRowProps, IRowState> {
           </Divider> */}
           <div className="event-select">
             <Select
-            suffixIcon={<CaretDownFilled/>}
-              showSearch
-              // bordered={false}
+              suffixIcon={<CaretDownFilled />}
+              //showSearch
               value={this.props.eventRow.rowState!.eventSelected}
               style={{ width: 300 , marginRight: 240}}
               onChange={this.handleEventChange}
@@ -241,7 +242,7 @@ export class EventRow extends React.Component<IEventRowProps, IRowState> {
               notFoundContent={
                 this.state.fetchingEvents ? <Spin size="small" /> : null
               }
-              filterOption={(input, option) =>
+              filterOption={(input: string, option: any) =>
                 option!.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
             >
