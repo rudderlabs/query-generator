@@ -233,7 +233,7 @@ export class EventRow extends React.Component<IEventRowProps, IRowState> {
           <div className="event-select">
             <Select
               suffixIcon={<CaretDownFilled />}
-              //showSearch
+              showSearch
               value={this.props.eventRow.rowState!.eventSelected}
               style={{ width: 300 , marginRight: 240}}
               onChange={this.handleEventChange}
