@@ -11,7 +11,8 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import { IEvent } from "../../models/event";
 import { IEventStore } from "../../app-stores/events";
 import { observer, inject } from "mobx-react";
-import { Label, EventLabel } from "../../App";
+import { Label, EventLabel, LabelButton } from "../../App";
+import { ReactComponent as Plus } from "../../plus.svg";
 
 import styled from "styled-components";
 
@@ -301,7 +302,10 @@ export class EventGroup extends React.Component<
 
           <div>
           <EventLabel> Events </EventLabel>
-          <Label onClick={() => this.onAddButtonClicked()}> ADD EVENTS </Label>
+          <LabelButton onClick={() => this.onAddButtonClicked()}> 
+            <Plus />
+            ADD EVENTS 
+          </LabelButton>
           </div>
 
           {/* <Button

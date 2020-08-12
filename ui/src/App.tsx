@@ -24,6 +24,22 @@ export const Label = styled.span`
   margin-top: 31px;
 `;
 
+export const LabelButton = styled.span`
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: #6d0fa7;
+  margin-top: 31px;
+  &:hover {
+    cursor: pointer;
+  }
+  svg {
+    margin-right: 10px;
+  }
+`;
+
 export const EventLabel = styled.span`
   font-family: Noto Sans;
   font-style: normal;
