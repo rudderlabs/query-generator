@@ -39,6 +39,9 @@ export class Event implements IEvent {
     
                         resolve()
                        
+                    }).catch((error) => {
+                        this.properties.push(new EventProperties("Unable to fetch values", this.type=="users"? "users":this.name))
+                        resolve()
                     })
     
             })
@@ -59,6 +62,9 @@ export class Event implements IEvent {
     
                         resolve()
                        
+                    }).catch((error) => {
+                        this.properties.push(new EventProperties("Unable to fetch values", this.type=="users"? "users":this.name))
+                        resolve()
                     })
     
             })

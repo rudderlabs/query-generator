@@ -37,8 +37,13 @@ export class EventProperties implements IProp {
                         this.values.push(new EventPropValue(value[this.name]));
                     })
 
+                    this.values.push(new EventPropValue("none"))
+
                     resolve()
                    
+                }).catch((error) => {
+                    this.values.push(new EventPropValue("none"))
+                    resolve()
                 })
 
         })

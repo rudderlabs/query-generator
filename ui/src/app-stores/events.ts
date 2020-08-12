@@ -44,6 +44,8 @@ export class EventStore implements IEventStore {
 
                     resolve()
                    
+                }).catch((error) => {
+                    this.events.push(new Event("Unable to fetch values","events"));
                 })
 
         })
