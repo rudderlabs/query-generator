@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import { IEvent } from "../../models/event";
 import { inject, observer } from "mobx-react";
 import { Select, Typography, Divider, Spin } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteFilled , CaretDownFilled} from "@ant-design/icons";
 import { Button, Row, Col, Card } from "antd";
 import { eventStore, IEventStore } from "../../app-stores/events";
 import { IWhereClause } from "../eventrows";
@@ -11,6 +11,7 @@ import { IProp } from "../../models/properties";
 import { async } from "q";
 import { IVal, EventPropValue } from "../../models/values";
 import { isValidES3Identifier } from "@babel/types";
+import "./index.css";
 
 const { Option } = Select;
 
@@ -124,17 +125,21 @@ export class WhereClauseRow extends React.Component<
     //console.log("index: " + this.props.whereClauseList!.index + " rendering with " + this.props.whereClauseList!.property + ' ' +  this.props.whereClauseList!.compValue + ' ' +  this.props.whereClauseList!.propertyValue)
     return (
       <>
-        <Divider
-          orientation="left"
-          style={{ color: "#333", fontWeight: "normal" }}
-        >
-          where
-        </Divider>
-        <Row gutter={8}>
-          <Col span={6}>
-            <Select
+      <div className="where-clause-row">
+      <DeleteFilled
+              onClick={() => {
+                this.props.whereClauseList!.removeFn(
+                 this.props.whereClauseList!.eventRowIndex!, this.props.whereClauseList!.whereClauseIndex
+                );
+              }}
+            />
+
+      <span className="where-clause-text">WHERE</span>
+      <Select
               showSearch
-              style={{ width: 120 }}
+              suffixIcon={<CaretDownFilled/>}
+              // bordered={false}
+              style={{ width: 150,  marginLeft: 40, marginRight: 23}}
               value={this.props.whereClauseList!.property}
               onChange={this.handlePropEventChange}
               onSearch={this.onSearch}
@@ -152,12 +157,13 @@ export class WhereClauseRow extends React.Component<
                 </Option>
               ))}
             </Select>
-          </Col>
-          <Col span={6}>
+
             <Select
               disabled={this.props.whereClauseList!.property==''}
               showSearch
-              style={{ width: 70 }}
+              suffixIcon={<CaretDownFilled/>}
+              // bordered={false}
+              style={{ width: 90 , marginRight: 23}}
               value={this.props.whereClauseList!.compValue}
               onChange={this.handleCompEventChange}
               onSearch={this.onSearch}
@@ -172,12 +178,13 @@ export class WhereClauseRow extends React.Component<
                 </Option>
               ))}
             </Select>
-          </Col>
-          <Col span={6}>
+
             <Select
               disabled={this.props.whereClauseList!.property==''}
               showSearch
-              style={{ width: 100 }}
+              suffixIcon={<CaretDownFilled/>}
+              // bordered={false}
+              style={{ width: 150 }}
               value={this.props.whereClauseList!.propertyValue}
               onChange={this.handleValueEventChange}
               onSearch={this.onSearchVal}
@@ -198,17 +205,29 @@ export class WhereClauseRow extends React.Component<
                 </Option>
               ))}
             </Select>
+
+           
+      </div>
+        {/* <Divider
+          orientation="left"
+          style={{ color: "#333", fontWeight: "normal" }}
+        >
+          where
+        </Divider>
+        <Row gutter={8}>
+          <Col span={6}>
+           
+          </Col>
+          <Col span={6}>
+            
+          </Col>
+          <Col span={6}>
+           
           </Col>
           <Col span={3}>
-            <DeleteOutlined
-              onClick={() => {
-                this.props.whereClauseList!.removeFn(
-                 this.props.whereClauseList!.eventRowIndex!, this.props.whereClauseList!.whereClauseIndex
-                );
-              }}
-            />
+           
           </Col>
-        </Row>
+        </Row> */}
       </>
     );
   }

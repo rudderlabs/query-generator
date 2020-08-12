@@ -29,7 +29,7 @@ export class Event implements IEvent {
                     "database": "dev",
 	                "schema": "unity_prod",
                     "event": "users",
-                    "cache_refresh_hours": 200
+                    "cache_refresh_hours": 1000000000000000000000000000000000000
                 }).then((res) => {
                         let propertiesData: any[] = res.data;
                         this.properties = []
@@ -48,7 +48,7 @@ export class Event implements IEvent {
                     "database": "dev",
                     "schema": "unity_prod",
                     "event": this.name,
-                    "cache_refresh_hours": 200
+                    "cache_refresh_hours": 1000000000000000000000000000000000000
                 }).then((res) => {
                         let propertiesData: any[] = res.data;
                         this.properties = []

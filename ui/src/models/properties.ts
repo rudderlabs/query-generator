@@ -28,7 +28,7 @@ export class EventProperties implements IProp {
 	            "schema": "unity_prod",
                 "event": this.event,
                 "property": this.name,
-                "cache_refresh_hours": 200
+                "cache_refresh_hours": 1000000000000000000000000000000000000
             }).then((res) => {
                     let valuesData: any[] = res.data;
                     this.values = [];

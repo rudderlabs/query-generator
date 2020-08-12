@@ -3,13 +3,15 @@ import * as ReactDOM from "react-dom";
 import { IEvent } from "../../models/event";
 import { inject, observer } from "mobx-react";
 import { Select, Typography, Divider, Spin } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteFilled,CaretDownFilled} from "@ant-design/icons";
 import { Button, Row, Col, Card } from "antd";
 import { eventStore, IEventStore } from "../../app-stores/events";
 import { IWhereClause, IGroupClause } from "../eventrows";
 import { IProp } from "../../models/properties";
 import { async } from "q";
 import { IVal } from "../../models/values";
+import "./index.css";
+
 
 const { Option } = Select;
 
@@ -22,7 +24,6 @@ export interface IGroupClauseState {
   data: IProp[];
 }
 
-
 export class GroupClauseRow extends React.Component<
   IGroupClauseProp,
   IGroupClauseState
@@ -31,7 +32,7 @@ export class GroupClauseRow extends React.Component<
     super(props);
     this.state = {
       fetchingProperties: true,
-      data: []
+      data: [],
     };
   }
 
@@ -39,7 +40,7 @@ export class GroupClauseRow extends React.Component<
     this.props.groupClauseList!.event.fetchProperties().then(() => {
       this.setState({
         fetchingProperties: false,
-        data: this.props.groupClauseList!.event.properties
+        data: this.props.groupClauseList!.event.properties,
       });
     });
   }
@@ -52,23 +53,54 @@ export class GroupClauseRow extends React.Component<
   }
 
   handlePropEventChange = async (value: string) => {
-      this.props.groupClauseList!.updateProperty(this.props.groupClauseList!.eventRowIndex, this.props.groupClauseList!.groupClauseIndex, value);
+    this.props.groupClauseList!.updateProperty(
+      this.props.groupClauseList!.eventRowIndex,
+      this.props.groupClauseList!.groupClauseIndex,
+      value
+    );
   };
-
 
   onSearch = (val: string) => {
     //console.log("search:", val);
   };
 
   render() {
-    const {
-      fetchingProperties,
-      data
-    } = this.state;
+    const { fetchingProperties, data } = this.state;
     //console.log("index: " + this.props.whereClauseList!.index + " rendering with " + this.props.whereClauseList!.property + ' ' +  this.props.whereClauseList!.compValue + ' ' +  this.props.whereClauseList!.propertyValue)
     return (
       <>
-        <Divider
+        <div className="group-clause-row">
+          <DeleteFilled
+            onClick={() => {
+              this.props.groupClauseList!.removeFn(
+                this.props.groupClauseList!.eventRowIndex,
+                this.props.groupClauseList!.groupClauseIndex
+              );
+            }}
+          />
+          <span className="group-clause-text"> GROUP </span>
+          <Select
+            showSearch
+            suffixIcon={<CaretDownFilled/>}
+            // bordered={false}
+            style={{ width: 150,  marginLeft: 40, marginRight: 23}}
+            value={this.props.groupClauseList!.property}
+            onChange={this.handlePropEventChange}
+            onSearch={this.onSearch}
+            dropdownMatchSelectWidth={false}
+            notFoundContent={fetchingProperties ? <Spin size="small" /> : null}
+            filterOption={(input, option) =>
+              option!.children.indexOf(input) >= 0
+            }
+          >
+            {data.map((prop) => (
+              <Option key={prop.name} value={prop.name}>
+                {prop.name}
+              </Option>
+            ))}
+          </Select>
+        </div>
+        {/* <Divider
           orientation="left"
           style={{ color: "#333", fontWeight: "normal" }}
         >
@@ -76,39 +108,13 @@ export class GroupClauseRow extends React.Component<
         </Divider>
         <Row gutter={8}>
           <Col span={6}>
-            <Select
-              showSearch
-              style={{ width: 100 }}
-              value={this.props.groupClauseList!.property}
-              onChange={this.handlePropEventChange}
-              onSearch={this.onSearch}
-              dropdownMatchSelectWidth={false}
-              notFoundContent={
-                fetchingProperties ? <Spin size="small" /> : null
-              }
-              filterOption={(input, option) =>
-                option!.children.indexOf(input) >= 0
-              }
-            >
-              {data.map(prop => (
-                <Option key={prop.name} value={prop.name}>
-                  {prop.name}
-                </Option>
-              ))}
-            </Select>
+            
           </Col>
           
           <Col span={3}>
-            <DeleteOutlined
-              onClick={() => {
-                this.props.groupClauseList!.removeFn(
-                  this.props.groupClauseList!.eventRowIndex,
-                  this.props.groupClauseList!.groupClauseIndex
-                );
-              }}
-            />
+            
           </Col>
-        </Row>
+        </Row> */}
       </>
     );
   }

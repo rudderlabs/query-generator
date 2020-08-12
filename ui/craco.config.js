@@ -12,7 +12,8 @@ module.exports = {
                 '@font-family': 'Noto Sans',
                 '@dropdown-vertical-padding': '8px',
                 '@dropdown-edge-child-vertical-padding': '4px',
-                '@border-radius-base': '5px'
+                '@border-radius-base': '5px',
+                '@primary-1': '#F6F6F6'
             },
             javascriptEnabled: true,
           },

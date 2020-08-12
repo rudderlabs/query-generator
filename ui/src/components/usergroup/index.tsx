@@ -13,7 +13,19 @@ import { WhereClauseRow } from "../whereclause";
 import { GroupClauseRow } from "../groupclause";
 import { DeleteOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { IWhereClause } from "../eventrows";
+import { Label, EventLabel } from "../../App";
+import "./index.css";
 
+import styled from "styled-components";
+
+// margin-left: 0 ;
+// margin-right: auto;
+// margin-top: 26px;
+export const UserGroupContent = styled.div`
+display: flex;
+flex-flow: column wrap;
+
+`
 const { Option } = Select;
 
 export interface IUserGroupState {
@@ -26,7 +38,7 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      whereClauseList: []
+      whereClauseList: [],
     };
   }
 
@@ -43,7 +55,7 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
           }
           return clause;
         }
-      )
+      ),
     });
   };
 
@@ -60,7 +72,7 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
           }
           return clause;
         }
-      )
+      ),
     });
   };
 
@@ -77,7 +89,7 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
           }
           return clause;
         }
-      )
+      ),
     });
   };
 
@@ -85,9 +97,9 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
     console.log("===removing index===" + whereClauseIndex);
 
     this.setState({
-      whereClauseList: this.state.whereClauseList.filter(clause => {
+      whereClauseList: this.state.whereClauseList.filter((clause) => {
         return clause.whereClauseIndex != whereClauseIndex;
-      })
+      }),
     });
   };
 
@@ -106,18 +118,18 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
         removeFn: this.onRemoveWhereClause,
         updateProperty: this.updateProperty,
         updatePropertyValue: this.updatePropertyValue,
-        updateCompValue: this.updateCompValue
-      })
+        updateCompValue: this.updateCompValue,
+      }),
     });
   };
 
-  fetchState = ()  => {
+  fetchState = () => {
     console.log(
       "=======USERGROUP STATE======= ",
       console.log(this.state.whereClauseList)
     );
-    return this.state.whereClauseList
-  }
+    return this.state.whereClauseList;
+  };
 
   render() {
     console.log(
@@ -125,7 +137,13 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
     );
     return (
       <>
-        <p>Users</p>
+      <UserGroupContent>
+        <div>
+        <EventLabel> Users </EventLabel>
+        <Label onClick={() => this.onWhereButtonClicked()}> ADD USERS </Label>
+        </div>
+
+        {/* <p>Users</p>
 
         <Button
           type="primary"
@@ -136,10 +154,15 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
           onClick={() => this.onWhereButtonClicked()}
         >
           Add User Filters...
-        </Button>
-        {this.state.whereClauseList.map(clause => (
+        </Button> */}
+        {this.state.whereClauseList.map((clause) => (
+          <div className="user-group-where-clause-content">
           <WhereClauseRow whereClauseList={clause} />
+          </div>
         ))}
+
+        
+      </UserGroupContent>
       </>
     );
   }

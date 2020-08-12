@@ -34,7 +34,7 @@ export class EventStore implements IEventStore {
             fetchService().post("/getevents", {
                 "database": "dev",
                 "schema": "unity_prod",
-                "cache_refresh_hours": 200}).then((res) => {
+                "cache_refresh_hours": 1000000000000000000000000000000000000}).then((res) => {
                     let eventData: any[] = res.data;
                     this.events = [];
                     eventData.map(event => {
