@@ -13,7 +13,7 @@ import { WhereClauseRow } from "../whereclause";
 import { GroupClauseRow } from "../groupclause";
 import { DeleteOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { IWhereClause } from "../eventrows";
-import { Label, EventLabel, LabelButton } from "../../App";
+import { Label, EventLabel, LabelButton, UserLabel } from "../../App";
 import { ReactComponent as Plus } from "../../plus.svg";
 import "./index.css";
 
@@ -140,7 +140,7 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
       <>
       <UserGroupContent>
         <div>
-        <EventLabel> Users </EventLabel>
+        <UserLabel> Users </UserLabel>
         <LabelButton onClick={() => this.onWhereButtonClicked()}> 
           <Plus />
           ADD USERS 

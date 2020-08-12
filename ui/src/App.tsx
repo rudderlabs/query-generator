@@ -51,6 +51,17 @@ export const EventLabel = styled.span`
   margin-top: 31px;
 `;
 
+export const UserLabel = styled.span`
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  margin-left: 21px;
+  margin-right: 16px;
+  margin-top: 31px;
+`;
+
 export const StyledButton = styled(Button)`
   margin-left: 21px;
   margin-top: 1px;
