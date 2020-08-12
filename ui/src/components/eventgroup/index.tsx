@@ -61,7 +61,10 @@ export class EventGroup extends React.Component<
         return row;
       }),
     });
-    this.props.updateSqlState(this.state.eventRows)
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.eventRows)
+    })
+    
   };
 
   updateWhereClauseProperty = (
@@ -85,7 +88,9 @@ export class EventGroup extends React.Component<
         return row;
       }),
     });
-    this.props.updateSqlState(this.state.eventRows)
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.eventRows)
+    })
   };
 
   updateGroupClauseProperty = (
@@ -109,7 +114,9 @@ export class EventGroup extends React.Component<
         return row;
       }),
     });
-    this.props.updateSqlState(this.state.eventRows)
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.eventRows)
+    })
   };
   updateWhereClausePropertyValue = (
     rowIndex: number,
@@ -132,7 +139,9 @@ export class EventGroup extends React.Component<
         return row;
       }),
     });
-    this.props.updateSqlState(this.state.eventRows)
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.eventRows)
+    })
   };
   updateWhereClauseCompValue = (
     rowIndex: number,
@@ -155,7 +164,9 @@ export class EventGroup extends React.Component<
         return row;
       }),
     });
-    this.props.updateSqlState(this.state.eventRows)
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.eventRows)
+    })
   };
   removeWhereClause = (rowIndex: number, whereClauseIndex: number) => {
     this.setState({
@@ -170,7 +181,9 @@ export class EventGroup extends React.Component<
         return row;
       }),
     });
-    this.props.updateSqlState(this.state.eventRows)
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.eventRows)
+    })
   };
   removeGroupClause = (rowIndex: number, groupClauseIndex: number) => {
     this.setState({
@@ -185,7 +198,9 @@ export class EventGroup extends React.Component<
         return row;
       }),
     });
-    this.props.updateSqlState(this.state.eventRows)
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.eventRows)
+    })
   };
   addWhereClause = (
     rowIndex: number,
@@ -211,7 +226,9 @@ export class EventGroup extends React.Component<
         return row;
       }),
     });
-    this.props.updateSqlState(this.state.eventRows)
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.eventRows)
+    })
   };
   addGroupClause = (
     rowIndex: number,
@@ -233,7 +250,9 @@ export class EventGroup extends React.Component<
         return row;
       }),
     });
-    this.props.updateSqlState(this.state.eventRows)
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.eventRows)
+    })
   };
 
   onAddButtonClicked = () => {
