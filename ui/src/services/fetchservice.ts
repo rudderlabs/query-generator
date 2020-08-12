@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 const BACKEND_BASE_URL =
-  process.env.QUERY_GEN_BACKEND_URL || 'https://query-gen.dev.rudderlabs.com' //'http://localhost:3001'//'https://query-gen.dev.rudderlabs.com';
+  process.env.QUERY_GEN_BACKEND_URL || 'http://localhost:3001'
 
 const fetchService = () => {
     return Axios.create({

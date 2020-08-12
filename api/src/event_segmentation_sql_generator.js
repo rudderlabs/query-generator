@@ -1,6 +1,6 @@
 const fs = require('fs');
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const snowflake = require('snowflake-sdk');
 
@@ -127,7 +127,7 @@ const app = express();
 
 app.use(bodyParser.json({ type: 'application/json' }));
 
-app.use(cors())
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.status(404).send('GET Not Supported');
@@ -311,7 +311,6 @@ app.post('/getevents', (req, res) => {
 
   const query = `select distinct(event) from ${tracksTable}`;
 
-  // Try to connect to Snowflake, and check whether the connection was successful.
   connection.connect((err, conn) => {
     if (err) {
       console.error(`Unable to connect: ${err.message}`);

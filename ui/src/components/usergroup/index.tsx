@@ -29,11 +29,14 @@ flex-flow: column wrap;
 `
 const { Option } = Select;
 
+export interface IUserGroupProperty {
+  updateSqlState(whereRows:IWhereClause[]): void
+}
 export interface IUserGroupState {
   whereClauseList: IWhereClause[];
 }
 
-export class UserGroup extends React.Component<any, IUserGroupState> {
+export class UserGroup extends React.Component<IUserGroupProperty, IUserGroupState> {
   lastWhereClauseIndex = 0;
 
   constructor(props: any) {
@@ -58,6 +61,10 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
         }
       ),
     });
+
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.whereClauseList)
+    })
   };
 
   updatePropertyValue = (
@@ -75,6 +82,10 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
         }
       ),
     });
+
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.whereClauseList)
+    })
   };
 
   updateCompValue = (
@@ -92,6 +103,10 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
         }
       ),
     });
+
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.whereClauseList)
+    })
   };
 
   onRemoveWhereClause = (eventRowIndex: number, whereClauseIndex: number) => {
@@ -102,6 +117,10 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
         return clause.whereClauseIndex != whereClauseIndex;
       }),
     });
+
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.whereClauseList)
+    })
   };
 
   onWhereButtonClicked = () => {
@@ -122,6 +141,10 @@ export class UserGroup extends React.Component<any, IUserGroupState> {
         updateCompValue: this.updateCompValue,
       }),
     });
+
+    setTimeout(() => {
+      this.props.updateSqlState(this.state.whereClauseList)
+    })
   };
 
   fetchState = () => {

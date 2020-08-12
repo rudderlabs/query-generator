@@ -196,10 +196,24 @@ export class App extends React.Component<any, IAppState> {
       lastRowGroupByProperty = lastGroupRow.property || '';
     }
 
-    let isGroupIncomplte = lastRowEvent == '' || lastRowWhereProperty == '' || lastRowWhereCompValue == '' || 
+    let isGroupIncomplete = lastRowEvent == '' || lastRowWhereProperty == '' || lastRowWhereCompValue == '' || 
     lastRowWherePropertyValue == '' || lastRowGroupByProperty == '';
 
-    this.setState({isEventGroupComplete: !isGroupIncomplte}) 
+    this.setState({isEventGroupComplete: !isGroupIncomplete}) 
+    return
+  }
+
+  isUserGroupInComplete = (whereRows: IWhereClause[]) => {
+    if(whereRows.length == 0) {
+      this.setState({isUserGroupComplete: true})
+      return
+    }
+    let lastRowWhereProperty = whereRows[whereRows.length-1].property || '';
+    let lastRowWhereCompValue = whereRows[whereRows.length-1].compValue || '';
+    let lastRowWherePropertyValue = whereRows[whereRows.length-1].propertyValue || '';
+
+    let isGroupIncomplete = lastRowWhereProperty == '' || lastRowWhereCompValue == '' || lastRowWherePropertyValue == '';
+    this.setState({isUserGroupComplete: !isGroupIncomplete})
     return
   }
 
@@ -217,7 +231,7 @@ export class App extends React.Component<any, IAppState> {
               updateSqlState={this.isEventGroupInComplete}
             />
 
-            <UserGroup ref={this.userGroupRef} />
+            <UserGroup ref={this.userGroupRef} updateSqlState={this.isUserGroupInComplete}/>
           </Provider>
 
           <StyledDivider />
