@@ -257,7 +257,7 @@ export class EventGroup extends React.Component<
   };
 
   onAddButtonClicked = () => {
-    console.log("======ADDING ROW====", this.lastEventRowCount);
+    //console.log("======ADDING ROW====", this.lastEventRowCount);
     this.setState({
       eventRows: this.state.eventRows.concat({
         rowState: { eventSelected: "", whereClauses: [], groupClauses: [] },
@@ -273,7 +273,7 @@ export class EventGroup extends React.Component<
   };
 
   onEventRowRemoved = (index: number) => {
-    console.log("======REMOVING ROW====", index);
+    //console.log("======REMOVING ROW====", index);
     this.setState({
       eventRows: this.state.eventRows.filter((clause) => {
         return index != clause.index;
@@ -287,10 +287,10 @@ export class EventGroup extends React.Component<
   };
 
   fetchState = () => {
-    console.log(
+    /* console.log(
       "=====PRESENT STATE====== ",
       JSON.stringify(this.state.eventRows)
-    );
+    ); */
     return this.state.eventRows;
   };
 

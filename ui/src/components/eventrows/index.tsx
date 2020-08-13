@@ -12,7 +12,7 @@ import { IEvent } from "../../models/event";
 import { eventNames } from "cluster";
 import { WhereClauseRow } from "../whereclause";
 import { GroupClauseRow } from "../groupclause";
-import { DeleteFilled, CaretDownFilled, CaretDownOutlined } from "@ant-design/icons";
+import { DeleteFilled, CaretDownFilled } from "@ant-design/icons";
 import styled from "styled-components";
 
 export const StyledEventSelect = styled(Select)<any>`
@@ -147,17 +147,17 @@ export class EventRow extends React.Component<IEventRowProps, IRowState> {
   };
 
   onSearch = (val: string) => {
-    console.log("search:", val);
+    //console.log("search:", val);
   };
 
   onRemoveWhereClause = (index: number) => {
-    console.log("===removing index===" + index);
+    //console.log("===removing index===" + index);
 
     this.props.eventRow.removeWhereClause(this.props.eventRow.rowIndex!, index);
   };
 
   onRemoveGroupClause = (index: number) => {
-    console.log("===removing group index===" + index);
+    //console.log("===removing group index===" + index);
     this.props.eventRow.removeGroupClause(this.props.eventRow.rowIndex!, index);
   };
 
@@ -167,7 +167,7 @@ export class EventRow extends React.Component<IEventRowProps, IRowState> {
     let event: any = store.events.filter((ev: IEvent) => {
       return ev.name == eventSelected;
     });
-    console.log("===index assigned===", this.lastWhereClauseIndex);
+    //console.log("===index assigned===", this.lastWhereClauseIndex);
 
     this.props.eventRow.addWhereClause(
       this.props.eventRow.rowIndex!,
@@ -182,7 +182,7 @@ export class EventRow extends React.Component<IEventRowProps, IRowState> {
     let event: any = store.events.filter((ev: IEvent) => {
       return ev.name == eventSelected;
     });
-    console.log("===group index assigned===", this.lastGroupClauseIndex);
+    //console.log("===group index assigned===", this.lastGroupClauseIndex);
 
     this.props.eventRow.addGroupClause(
       this.props.eventRow.rowIndex!,

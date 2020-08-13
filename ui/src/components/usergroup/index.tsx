@@ -110,7 +110,7 @@ export class UserGroup extends React.Component<IUserGroupProperty, IUserGroupSta
   };
 
   onRemoveWhereClause = (eventRowIndex: number, whereClauseIndex: number) => {
-    console.log("===removing index===" + whereClauseIndex);
+    //console.log("===removing index===" + whereClauseIndex);
 
     this.setState({
       whereClauseList: this.state.whereClauseList.filter((clause) => {
@@ -125,7 +125,7 @@ export class UserGroup extends React.Component<IUserGroupProperty, IUserGroupSta
 
   onWhereButtonClicked = () => {
     let event: any = new Event("", "users");
-    console.log("===index assigned===", this.lastWhereClauseIndex);
+    //console.log("===index assigned===", this.lastWhereClauseIndex);
 
     this.setState({
       whereClauseList: this.state.whereClauseList.concat({
@@ -148,17 +148,17 @@ export class UserGroup extends React.Component<IUserGroupProperty, IUserGroupSta
   };
 
   fetchState = () => {
-    console.log(
+    /* console.log(
       "=======USERGROUP STATE======= ",
       console.log(this.state.whereClauseList)
-    );
+    ); */
     return this.state.whereClauseList;
   };
 
   render() {
-    console.log(
+    /* console.log(
       "update user group state length: " + this.state.whereClauseList.length
-    );
+    ); */
     return (
       <>
       <UserGroupContent>

@@ -61,9 +61,9 @@ export class WhereClauseRow extends React.Component<
 
   componentDidUpdate() {
     //console.log("===where clause component updated===")
-    console.log("where clause props: " + this.props.whereClauseList!.whereClauseIndex + ' ' +
+    /* console.log("where clause props: " + this.props.whereClauseList!.whereClauseIndex + ' ' +
       this.props.whereClauseList!.property + ' ' +  this.props.whereClauseList!.compValue + ' ' +  this.props.whereClauseList!.propertyValue
-    );
+    ); */
   }
 
   handlePropEventChange = async (value: string) => {

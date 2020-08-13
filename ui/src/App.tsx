@@ -102,7 +102,7 @@ export class App extends React.Component<any, IAppState> {
       Object.keys(res).forEach((table) => {
         query.push(res[table]);
       });
-      console.log(query.join("\n"));
+      //console.log(query.join("\n"));
       this.setState({
         fetchSql: false,
         sql: query.join(";\n\n"),
@@ -168,7 +168,7 @@ export class App extends React.Component<any, IAppState> {
   };
 
   isEventGroupInComplete = (eventRows:IEventRowRef[]) => {
-    console.log("======UPDATING SQL ENABLED=========")
+    //console.log("======UPDATING SQL ENABLED=========")
     if(eventRows.length == 0) {
       this.setState({isEventGroupComplete: false})
       return 
