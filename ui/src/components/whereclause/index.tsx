@@ -159,7 +159,7 @@ export class WhereClauseRow extends React.Component<
             </Select>
 
             <Select
-              disabled={this.props.whereClauseList!.property==''}
+              disabled={this.props.whereClauseList!.property=='' || this.props.whereClauseList!.property.indexOf("Unable to fetch") >= 0}
               showSearch
               suffixIcon={<CaretDownFilled/>}
               // bordered={false}
@@ -181,7 +181,7 @@ export class WhereClauseRow extends React.Component<
 
             <Popover content="Provide custom input if value is not present in the list">
               <Select
-                disabled={this.props.whereClauseList!.property==''}
+                disabled={this.props.whereClauseList!.property=='' || this.props.whereClauseList!.property.indexOf("Unable to fetch") >= 0}
                 showSearch
                 suffixIcon={<CaretDownFilled/>}
                 // bordered={false}
