@@ -37,7 +37,7 @@ export class EventProperties implements IProp {
                 "password": process.env.REACT_APP_PASSWORD,
                 "event": this.event,
                 "property": this.name,
-                "cache_refresh_hours": 1000000000000000000000000000000000000
+                "cache_refresh_hours": process.env.REACT_APP_CACHE_REFRESH_HOURS
             }).then((res) => {
                     let valuesData: any[] = res.data;
                     this.values = [];

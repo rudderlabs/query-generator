@@ -35,7 +35,7 @@ export class Event implements IEvent {
             username: process.env.REACT_APP_USERNAME,
             password: process.env.REACT_APP_PASSWORD,
             event: "users",
-            cache_refresh_hours: 1000000000000000000000000000000000000,
+            cache_refresh_hours: process.env.REACT_APP_CACHE_REFRESH_HOURS,
           })
           .then((res) => {
             let propertiesData: any[] = res.data;
@@ -71,7 +71,7 @@ export class Event implements IEvent {
             username: process.env.REACT_APP_USERNAME,
             password: process.env.REACT_APP_PASSWORD,
             event: this.name,
-            cache_refresh_hours: 1000000000000000000000000000000000000,
+            cache_refresh_hours: process.env.REACT_APP_CACHE_REFRESH_HOURS,
           })
           .then((res) => {
             let propertiesData: any[] = res.data;

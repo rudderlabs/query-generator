@@ -14,6 +14,7 @@ export interface IEventStore {
 const warehouse:string = process.env.REACT_APP_WH || 'SNOWFLAKE'
 const eventIndex = warehouse == 'SNOWFLAKE' ? 'EVENT' : 'event'
 
+
 export class EventStore implements IEventStore {
     @observable events: IEvent[];
     eventCount: number;  
@@ -42,7 +43,7 @@ export class EventStore implements IEventStore {
                 "account": process.env.REACT_APP_ACCOUNT,
                 "username": process.env.REACT_APP_USERNAME,
                 "password": process.env.REACT_APP_PASSWORD,
-                "cache_refresh_hours": 1000000000000000000000000000000000000}).then((res) => {
+                "cache_refresh_hours": process.env.REACT_APP_CACHE_REFRESH_HOURS}).then((res) => {
                     let eventData: any[] = res.data;
                     this.events = [];
                     eventData.map(event => {
