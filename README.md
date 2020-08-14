@@ -48,7 +48,7 @@ There are two variants to this program:
 	
 * `redshift_populate_all_event_property_values.js` - This works on Redshift. You can update the connection information in `redshift_populate_all_event_property_values_input.json`. Remember to append `PGUSER=... PGPASSWORD=...` at the command line before `node redshift_populate_all_event_property_values.js`.
 
-## Complementary Interface to the RudderStack Query Generator
+## Complementary Interface for the RudderStack Query Generator
 
 This interface was bootstrapped with [Craco](https://github.com/gsoft-inc/craco).
 
@@ -70,6 +70,9 @@ This `env` variable controls whether to fetch data from warehouse or read from c
 This command builds the app for production to the `build` folder.
 
 **Note**: Pass the `env` variables, so that the Craco build picks them up before packaging.
+
+### User Interface
+![UI](https://user-images.githubusercontent.com/59817155/90257556-f662fe00-de64-11ea-95ec-85546a80e230.png)
 
 ## Contact Us
 
