@@ -28,13 +28,15 @@ The server accepts `POST` requests and supports following endpoints:
 
 * `getevents` - This retrieves list of RudderStack events for which the data is present in the warehouse. The input for the query needs to be specified in the format outlined in the `api/data/get_events_input.json` file, and passed in the request body.
 	
-* `geteventproperties` - list of properties associated with each event from the list above. The input for the query needs to be specified in the format outlined in the `api/data/get_event_properties_input.json` file, and passed in the request body.  
+* `geteventproperties` - This contains the list of properties associated with each event from the list above. The input for the query needs to be specified in the format outlined in the `api/data/get_event_properties_input.json` file, and passed in the request body.
 	
-* `geteventpropertyvalues` - This contains up to 500 distinct values for each of the properties of each of the events from the list mentioned above. The input for the query needs to be specified in the format outlined in the `api/data/get_event_property_values_input.json` file, and passed in the request body. 
+* `geteventpropertyvalues` - This contains up to 500 distinct values for each of the properties of each of the events from the list mentioned above. The input for the query needs to be specified in the format outlined in the `api/data/get_event_property_values_input.json` file, and passed in the request body.
 	
 * `getquery` - Allows you to generate event information retrieval query given the filters and *group by* clauses. The input for the query needs to be specified in the format outlined in the `api/data/event_segmentation_query_gen_input.json` file, and passed in the request body.
 
-**Note**: For each of the above cases, the command to retrieve the information would look like `curl -X POST -G "Content-Type: application/json" --data-binary @<input JSON file path> http://localhost:3001/<endpoint>`
+**Note**: For each of the above cases, the command to retrieve the information would look like the following:
+
+`curl -X POST -G "Content-Type: application/json" --data-binary @<input JSON file path> http://localhost:3001/<endpoint>`
 
 ## Standalone Node.js Program for Pre-populating Information
 
