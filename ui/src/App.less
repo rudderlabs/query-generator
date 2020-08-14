@@ -1,7 +1,50 @@
-@import '~antd/dist/antd.less';
+@import "~antd/dist/antd.less";
 
 .App {
-  text-align: center;
+  //text-align: center;
+  background-color: #ffffff;
+  //height: 30vh;
+  //width: 50vw;
+  //min-height: fit-content;
+  font-family: Noto Sans;
+  width: 50%;
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+  display: inline-flex;
+  flex-flow: column;
+  //align-content: flex-start;
+  margin-top: 32px;
+  margin-left: 300px;
+}
+
+.Sql-output {
+  // text-align: center;
+  background-color: #ffffff;
+  //height: 20vh;
+  width: 50%;
+  padding: 24px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-flow: column wrap;
+  margin-top: 18px;
+  margin-left: 300px;
+  margin-bottom: 30px;
+}
+
+.Sql-output-header {
+  width: 123px;
+  height: 25px;
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 128.91%;
+  color: #000000;
+  
 }
 
 .App-logo {
@@ -16,14 +59,23 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  // background-color: #282c34;
+  // min-height: 100vh;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  // font-size: calc(10px + 2vmin);
+  // color: white;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 33px;
+  margin-left: 300px;
+  margin-top: 52px;
+  /* identical to box height */
+
+  color: #684adf;
 }
 
 .App-link {
@@ -33,7 +85,7 @@
 .box {
   display: flex;
   flex-direction: row;
-  gap: 6px
+  gap: 6px;
 }
 
 @keyframes App-logo-spin {

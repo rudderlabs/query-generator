@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import './index.css';
+import './index.less';
 import App from './App';
 import { Provider } from 'mobx-react';
 import {eventStore} from './app-stores/events'
