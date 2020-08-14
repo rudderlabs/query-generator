@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { IEvent } from "../../models/event";
 import { inject, observer } from "mobx-react";
-import { Select, Typography, Divider, Spin } from "antd";
+import { Select, Typography, Divider, Spin, Popover } from "antd";
 import { DeleteFilled , CaretDownFilled} from "@ant-design/icons";
 import { Button, Row, Col, Card } from "antd";
 import { eventStore, IEventStore } from "../../app-stores/events";
@@ -179,32 +179,34 @@ export class WhereClauseRow extends React.Component<
               ))}
             </Select>
 
-            <Select
-              disabled={this.props.whereClauseList!.property==''}
-              showSearch
-              suffixIcon={<CaretDownFilled/>}
-              // bordered={false}
-              style={{ width: 150 }}
-              value={this.props.whereClauseList!.propertyValue}
-              onChange={this.handleValueEventChange}
-              onSearch={this.onSearchVal}
-              dropdownMatchSelectWidth={false}
-              notFoundContent={
-                fetchingPropertyValues ? <Spin size="small" /> : null
-              }
-              filterOption={(input, option) => {
-                if(option && option.children) {
-                  return option!.children.indexOf(input) >= 0  // tolowercase can be done but the inputs have null values
-                } return true
-              }
-              }
-            >
-              {propertyValues.map(prop => (
-                <Option key={prop.value} value={prop.value}>
-                  {prop.value}
-                </Option>
-              ))}
-            </Select>
+            <Popover content="Provide custom input if value is not present in the list">
+              <Select
+                disabled={this.props.whereClauseList!.property==''}
+                showSearch
+                suffixIcon={<CaretDownFilled/>}
+                // bordered={false}
+                style={{ width: 150 }}
+                value={this.props.whereClauseList!.propertyValue}
+                onChange={this.handleValueEventChange}
+                onSearch={this.onSearchVal}
+                dropdownMatchSelectWidth={false}
+                notFoundContent={
+                  fetchingPropertyValues ? <Spin size="small" /> : null
+                }
+                filterOption={(input, option) => {
+                  if(option && option.children) {
+                    return option!.children.indexOf(input) >= 0  // tolowercase can be done but the inputs have null values
+                  } return true
+                }
+                }
+              >
+                {propertyValues.map(prop => (
+                  <Option key={prop.value} value={prop.value}>
+                    {prop.value}
+                  </Option>
+                ))}
+              </Select>
+            </Popover>
 
            
       </div>
