@@ -47,3 +47,10 @@ There are two variants to this program:
 * `populate_all_event_property_values.js` - This works on Snowflake. You can update the connection details in `populate_all_event_property_values_input.json`
 	
 * `redshift_populate_all_event_property_values.js` - This works on Redshift. You can update the connection information in `redshift_populate_all_event_property_values_input.json`. Remember to append `PGUSER=... PGPASSWORD=...` at the command line before `node redshift_populate_all_event_property_values.js`.
+
+## Contact Us
+
+For more information on the RudderStack Query Generator, feel free to reach out to us on any of the platforms below:
+- [Discord](https://discordapp.com/invite/xNEdEGw)
+- [Twitter](https://twitter.com/rudderstack)
+- [LinkedIn](https://www.linkedin.com/company/rudderlabs/)
