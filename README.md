@@ -58,11 +58,15 @@ In the project directory, you can run the following commands:
 `REACT_APP_QUERY_GEN_BACKEND_URL=<SERVER_URL> REACT_APP_WH=<SNOWFLAKE/REDSHIFT> REACT_APP_DATABASE=<WAREHOUSE_DB_NAME>  REACT_APP_SCHEMA=<WAREHOUSE_SCHEMA_NAME> REACT_APP_ACCOUNT=<WAREHOUSE_ACCOUNT_URL> REACT_APP_USERNAME=<WAREHOUSE_ACCOUNT_NAME> REACT_APP_PASSWORD=<WAREHOUSE_ACCOUNT_PASSWORD> REACT_APP_CACHE_REFRESH_HOURS=<INTERVAL_BETWEEN_LAST_UPDATED_TIME_OF_PREPOPULATED_FILE_AND_NOW> npm start`
 
 This command runs the app in the development mode. Open http://localhost:3000 to view it in the browser.
+
 **Note**: Provide the `env` variables that are applicable to the Query Generator backend.
 	
-`REACT_APP_CACHE_REFRESH_HOURS` - This `env` variable controls whether to fetch data from warehouse or read from cache files, set this high to make the UI responsive      
+`REACT_APP_CACHE_REFRESH_HOURS`
+
+This `env` variable controls whether to fetch data from warehouse or read from cache files, set this high to make the UI responsive      
 
 `npm run build`
+
 This command builds the app for production to the `build` folder.
 
 **Note**: Pass the `env` variables, so that the Craco build picks them up before packaging.
