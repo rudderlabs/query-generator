@@ -11,6 +11,8 @@ import { Input } from "antd";
 import fetchService from "./services/fetchservice";
 import styled from "styled-components";
 import { Divider } from "antd";
+import { CopyOutlined } from '@ant-design/icons';
+import sqlFormatter from "sql-formatter";
 
 const { TextArea } = Input;
 
@@ -74,7 +76,8 @@ export interface IAppState {
   sql: string;
   fetchSql: boolean;
   isEventGroupComplete: boolean;
-  isUserGroupComplete: boolean
+  isUserGroupComplete: boolean;
+  copied: boolean
 }
 export class App extends React.Component<any, IAppState> {
   eventGroupRef: React.RefObject<EventGroup>;
@@ -86,7 +89,8 @@ export class App extends React.Component<any, IAppState> {
       sql: "",
       fetchSql: false,
       isEventGroupComplete: false,
-      isUserGroupComplete: true
+      isUserGroupComplete: true,
+      copied: false
     };
     this.eventGroupRef = React.createRef<EventGroup>();
     this.userGroupRef = React.createRef<UserGroup>();
@@ -100,7 +104,7 @@ export class App extends React.Component<any, IAppState> {
     this.fetchSql(eventGroup, userGroup).then((res) => {
       let query: string[] = [];
       Object.keys(res).forEach((table) => {
-        query.push(res[table]);
+        query.push(sqlFormatter.format(res[table]));
       });
       //console.log(query.join("\n"));
       this.setState({
@@ -251,9 +255,13 @@ export class App extends React.Component<any, IAppState> {
 
         <div className="Sql-output">
           {/* {fetchSql && <Spin size="small" />} */}
-          <span className="Sql-output-header">Results</span>
+          <div className="Sql-output-header-content">
+          <span className="Sql-output-header" >Results</span>
+          <CopyOutlined onClick={() => {navigator.clipboard.writeText(this.state.sql); this.setState({copied: true}); setTimeout(() => this.setState({copied: false}), 2000)}}/>
+          {this.state.copied && this.state.sql !== '' ?  <span className="copy-result">Results Copied</span> : null}
+          </div>
           <TextArea
-            style={{ marginTop: 25, backgroundColor: "#F2F2F2",minHeight: 190 }}
+            style={{ marginTop: 25,  fontWeight: 500, backgroundColor: "#F2F2F2", minHeight: 190 }}
             value={this.state.sql}
             placeholder="Query Generator Output"
             autoSize

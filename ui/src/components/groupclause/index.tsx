@@ -78,12 +78,12 @@ export class GroupClauseRow extends React.Component<
               );
             }}
           />
-          <span className="group-clause-text"> GROUP </span>
+          <span className="group-clause-text"> GROUP BY </span>
           <Select
             showSearch
             suffixIcon={<CaretDownFilled/>}
             // bordered={false}
-            style={{ width: 150,  marginLeft: 40, marginRight: 23}}
+            style={{ width: 150,  marginLeft: 20, marginRight: 23}}
             value={this.props.groupClauseList!.property}
             onChange={this.handlePropEventChange}
             onSearch={this.onSearch}
