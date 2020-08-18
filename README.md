@@ -20,8 +20,9 @@ It accepts `POST` requests and supports following endpoints
 The server can be started after cloning this repository and issuing following commands from the local repository root
 
 ```
-cd api; npm start
+cd api; npm install; npm start
 ```
+[![asciicast](https://asciinema.org/a/kG0ns8oFDJ8yJhKCvRWflhtBW.svg)](https://asciinema.org/a/kG0ns8oFDJ8yJhKCvRWflhtBW)
 
 All the sample input JSON files are under `api/data`
 
