@@ -58,7 +58,7 @@ This interface was bootstrapped with [Craco](https://github.com/gsoft-inc/craco)
 
 First, install the necessary dependencies for the app by running the `npm i` command:
 
-![Step 1](https://user-images.githubusercontent.com/59817155/90632288-cdb27e00-e241-11ea-972d-71846d3bdb18.gif)
+![Step 1](https://user-images.githubusercontent.com/59817155/90634896-15d39f80-e246-11ea-836f-c9e6d2df9782.PNG)
 
 Then, run the following command:
 
@@ -66,7 +66,7 @@ Then, run the following command:
 
 This command runs the app in the development mode. Open http://localhost:3000 to view it in the browser, like so:
 
-![Step 2](https://user-images.githubusercontent.com/59817155/90632297-d014d800-e241-11ea-9a36-508e930d988d.gif)
+![Step 2](https://user-images.githubusercontent.com/59817155/90635003-3b60a900-e246-11ea-81a1-39a01cb712d1.PNG)
 
 
 ⚠️ Make sure you provide the `env` variables that are applicable to the Query Generator backend.
