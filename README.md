@@ -56,7 +56,7 @@ This interface was bootstrapped with [Craco](https://github.com/gsoft-inc/craco)
 
 ### ⚡️ How to Use
 
-First, install the necessary dependencies for the app, as shown:
+First, install the necessary dependencies for the app by running the `npm i` command:
 
 ![Step 1](https://user-images.githubusercontent.com/59817155/90632288-cdb27e00-e241-11ea-972d-71846d3bdb18.gif)
 
