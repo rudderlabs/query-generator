@@ -23,6 +23,10 @@ cd api; npm start
 
 All the sample input JSON files are placed under `api/data`.
 
+Here's a quick demo on starting the Node.js Server:
+
+![Server Start](https://user-images.githubusercontent.com/59817155/90601941-924e8a00-e216-11ea-888b-98268a12e555.gif)
+
 ### 👌 Features
 
 The server accepts `POST` requests and supports following endpoints:
