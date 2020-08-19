@@ -6,7 +6,8 @@ These are:
  - A **Node.js Server** for generating information retrieval queries based on the user-specified conditions
  - A standalone **Node.js program** for prepopulating the list of events and other associated properties
 
-⚠️ We have tested these tools for Redshift and Snowflake. However, the generated queries should work on all the other data warehouses as well. Please [contact us](https://rudderstack.com/contact/) in case you come across any issues while using the RudderStack Query Generator for other data warehouses.
+####  ✓ We have tested the RudderStack Query Generator for Redshift and Snowflake. It is also fully compatible with the Segment data to the best of our knowledge. 
+####  ⚠️The generated queries should also work on all the other data warehouses. Please [contact us](https://rudderstack.com/contact/) in case you come across any issues while using the RudderStack Query Generator for other data warehouses.
 
 ## ⚡️ Node.js Server for Information Retrieval
 
