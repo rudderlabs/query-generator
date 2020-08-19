@@ -76,8 +76,18 @@ This command builds the app for production to the `build` folder.
 
 ⚠️ Pass the `env` variables, so that the Craco build picks them up before packaging.
 
-### ⚡️ User Interface
-![UI](https://user-images.githubusercontent.com/59817155/90257556-f662fe00-de64-11ea-95ec-85546a80e230.png)
+### ⚡️ RudderStack Query Generator Demo
+
+![Query Generator Demo 1](https://user-images.githubusercontent.com/59817155/90628835-f0419880-e23b-11ea-88db-a83288d265a6.gif)
+
+Here is how you can generate a query by adding the **Users** filter:
+
+![Query Generator Demo 2](https://user-images.githubusercontent.com/59817155/90628927-16673880-e23c-11ea-8e9d-5786a1f39c28.gif)
+
+You can copy the queries and run them on your warehouse data to get the desired results!
+
+![Queries Output](https://user-images.githubusercontent.com/59817155/90628949-21ba6400-e23c-11ea-83cb-9c600ce6bf79.gif)
+
 
 ## 👉 Contact Us
 
