@@ -21,11 +21,7 @@ You can start the Node.js server after cloning this repository and issuing follo
 cd api; npm start
 ```
 
-All the sample input JSON files are placed under `api/data`.
-
-Here's a quick demo on starting the Node.js Server:
-
-![Server Start](https://user-images.githubusercontent.com/59817155/90601941-924e8a00-e216-11ea-888b-98268a12e555.gif)
+⚠️ All the sample input JSON files are placed under `api/data`.
 
 ### 👌 Features
 
@@ -57,34 +53,41 @@ There are two variants to this program:
 
 This interface was bootstrapped with [Craco](https://github.com/gsoft-inc/craco).
 
-### ⚡️ Available Scripts
-In the project directory, you can run the following commands:
+### ⚡️ How to Use
+
+First, install the necessary dependencies for the app, as shown:
+
+![Step 1](https://user-images.githubusercontent.com/59817155/90632288-cdb27e00-e241-11ea-972d-71846d3bdb18.gif)
+
+Then, run the following command:
 
 `REACT_APP_QUERY_GEN_BACKEND_URL=<SERVER_URL> REACT_APP_WH=<SNOWFLAKE/REDSHIFT> REACT_APP_DATABASE=<WAREHOUSE_DB_NAME>  REACT_APP_SCHEMA=<WAREHOUSE_SCHEMA_NAME> REACT_APP_ACCOUNT=<WAREHOUSE_ACCOUNT_URL> REACT_APP_USERNAME=<WAREHOUSE_ACCOUNT_NAME> REACT_APP_PASSWORD=<WAREHOUSE_ACCOUNT_PASSWORD> REACT_APP_CACHE_REFRESH_HOURS=<INTERVAL_BETWEEN_LAST_UPDATED_TIME_OF_PREPOPULATED_FILE_AND_NOW> npm start`
 
-This command runs the app in the development mode. Open http://localhost:3000 to view it in the browser.
+This command runs the app in the development mode. Open http://localhost:3000 to view it in the browser, like so:
 
-⚠️ Provide the `env` variables that are applicable to the Query Generator backend.
+![Step 2](https://user-images.githubusercontent.com/59817155/90632297-d014d800-e241-11ea-9a36-508e930d988d.gif)
+
+
+⚠️ Make sure you provide the `env` variables that are applicable to the Query Generator backend.
 	
-`REACT_APP_CACHE_REFRESH_HOURS`
+`REACT_APP_CACHE_REFRESH_HOURS` - This `env` variable controls whether to fetch data from warehouse or read from cache files, set this high to make the UI responsive      
 
-This `env` variable controls whether to fetch data from warehouse or read from cache files, set this high to make the UI responsive      
-
-`npm run build`
-
-This command builds the app for production to the `build` folder.
+`npm run build` - This command builds the app for production to the `build` folder.
 
 ⚠️ Pass the `env` variables, so that the Craco build picks them up before packaging.
+
 
 ### ⚡️ RudderStack Query Generator Demo
 
 ![Query Generator Demo 1](https://user-images.githubusercontent.com/59817155/90628835-f0419880-e23b-11ea-88db-a83288d265a6.gif)
 
+
 Here is how you can generate a query by adding the **Users** filter:
 
 ![Query Generator Demo 2](https://user-images.githubusercontent.com/59817155/90628927-16673880-e23c-11ea-8e9d-5786a1f39c28.gif)
 
-You can copy the queries and run them on your warehouse data to get the desired results!
+
+You can then copy the queries and run them on your warehouse data to get the desired results!
 
 ![Queries Output](https://user-images.githubusercontent.com/59817155/90628949-21ba6400-e23c-11ea-83cb-9c600ce6bf79.gif)
 
