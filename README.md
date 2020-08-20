@@ -1,92 +1,55 @@
 # RudderStack Query Generator
 
-This repository contains two major tools that allow you to generate SQL queries on top of your warehouse data populated by [Rudderstack](https://rudderstack.com).
+RudderStack is an open-source Segment alternative for collecting, storing and routing customer event data securely to your data warehouse and dozens of other tools. Read more about RudderStack [here](https://github.com/rudderlabs/rudder-server).
 
-These are:
- - A **Node.js Server** for generating information retrieval queries based on the user-specified conditions
- - A standalone **Node.js program** for prepopulating the list of events and other associated properties
+The **RudderStack Query Generator** generates SQL queries for you by leveraging your warehouse data populated by [Rudderstack](https://rudderstack.com). You can then run these queries on your data warehouse to obtain the data that can be used for further analysis and insight generation.
 
-**✓ We have tested the RudderStack Query Generator for Redshift and Snowflake. It is also fully compatible with the Segment data to the best of our knowledge.**
+## ⚡️How It Works
 
-**⚠️The generated queries should also work on all the other data warehouses. Please [contact us](https://rudderstack.com/contact/) in case you come across any issues while using the RudderStack Query Generator for other data warehouses.**
+The RudderStack Query Generator has the following workflow:
 
-## ⚡️ Node.js Server for Information Retrieval
+- Pre-populates the list of RudderStack events and their associated properties present in the data warehouse
+- Retrieves the list of events and their properties based on the filtering conditions set by you through the UI
+- Automatically generates the SQL query based on the user-specified filters, which can be run on your data warehouse to obtain the required data
 
-This tool allows you to retrieve the list of RudderStack events and their associated properties present in the data warehouse, and use them to automatically generate an information retrieval query based on the filters set by you. These queries can then be run on your data warehouse to obtain the data that can be used for further analytics and insight generation.
+## ⚡️Key Features
+✓ No manual coding required, saving your time and effort <br>
+✓ Easy to use interface for generating the queries <br>
+✓ Fully tested for Redshift and Snowflake, but works with all the other data warehouses as well <br>
 
-### 💻 How to Start the Server
+## ⚡️ How to Use the RudderStack Query Generator
 
-You can start the Node.js server after cloning this repository and issuing following command from the local repository root:
-
-```
-cd api; npm start
-```
-
-⚠️ All the sample input JSON files are placed under `api/data`.
-
-### 👌 Features
-
-The server accepts `POST` requests and supports following endpoints:
-
-* `getevents` - This retrieves list of RudderStack events for which the data is present in the warehouse. The input for the query needs to be specified in the format outlined in the `api/data/get_events_input.json` file, and passed in the request body.
-	
-* `geteventproperties` - This contains the list of properties associated with each event from the list above. The input for the query needs to be specified in the format outlined in the `api/data/get_event_properties_input.json` file, and passed in the request body.
-	
-* `geteventpropertyvalues` - This contains up to 500 distinct values for each of the properties of each of the events from the list mentioned above. The input for the query needs to be specified in the format outlined in the `api/data/get_event_property_values_input.json` file, and passed in the request body.
-	
-* `getquery` - Allows you to generate event information retrieval query given the filters and *group by* clauses. The input for the query needs to be specified in the format outlined in the `api/data/event_segmentation_query_gen_input.json` file, and passed in the request body.
-
-⚠️ For each of the above cases, the command to retrieve the information would look like the following:
-
-`curl -X POST -G "Content-Type: application/json" --data-binary @<input JSON file path> http://localhost:3001/<endpoint>`
-
-## ⚡️ Standalone Node.js Program for Pre-populating Information
-
-This program can be used to pre-populate the list of events, their properties and list of values for those properties that have up to 500 distinct values. 
-
-There are two variants to this program:
-
-* `populate_all_event_property_values.js` - This works on Snowflake. You can update the connection details in `populate_all_event_property_values_input.json`
-	
-* `redshift_populate_all_event_property_values.js` - This works on Redshift. You can update the connection information in `redshift_populate_all_event_property_values_input.json`. Remember to append `PGUSER=... PGPASSWORD=...` at the command line before `node redshift_populate_all_event_property_values.js`.
-
-## ⚡️ Complementary Interface for the RudderStack Query Generator
-
-This interface was bootstrapped with [Craco](https://github.com/gsoft-inc/craco).
-
-### ⚡️ How to Use
-
-First, install the necessary dependencies for the app by running the `npm i` command:
+- First, install the necessary dependencies for the app by running the `npm i` command, as shown:
 
 ![Step 1](https://user-images.githubusercontent.com/59817155/90634896-15d39f80-e246-11ea-836f-c9e6d2df9782.PNG)
 
-Then, run the following command:
+- Then, run the following command:
 
 `REACT_APP_QUERY_GEN_BACKEND_URL=<SERVER_URL> REACT_APP_WH=<SNOWFLAKE/REDSHIFT> REACT_APP_DATABASE=<WAREHOUSE_DB_NAME>  REACT_APP_SCHEMA=<WAREHOUSE_SCHEMA_NAME> REACT_APP_ACCOUNT=<WAREHOUSE_ACCOUNT_URL> REACT_APP_USERNAME=<WAREHOUSE_ACCOUNT_NAME> REACT_APP_PASSWORD=<WAREHOUSE_ACCOUNT_PASSWORD> REACT_APP_CACHE_REFRESH_HOURS=<INTERVAL_BETWEEN_LAST_UPDATED_TIME_OF_PREPOPULATED_FILE_AND_NOW> npm start`
 
-This command runs the app in the development mode. Open http://localhost:3000 to view it in the browser, like so:
+The above command runs the app in the development mode. 
 
 ![Step 2](https://user-images.githubusercontent.com/59817155/90635003-3b60a900-e246-11ea-81a1-39a01cb712d1.PNG)
 
+- `REACT_APP_QUERY_GEN_BACKEND_URL` - The Query Generator backend runs on this URL
+- `REACT_APP_DATABASE` - Name of the Warehouse database goes here
+- `REACT_APP_SCHEMA` - Name of the warehouse schema goes here
+- `REACT_APP_ACCOUNT` - Specify the warehouse account URL
+- `REACT_APP_USERNAME` - Specify the warehouse account username
+- `EACT_APP_PASSWORD` - Specify the warehouse account password
+- `REACT_APP_CACHE_REFRESH_HOURS` - This variable determines whether to fetch the data from the data warehouse or read from the cached files. **Set a higher value here to make the UI more responsive**
+- `npm run build` - This command builds the app for production to the `build` folder.
 
-⚠️ Make sure you provide the `env` variables that are applicable to the Query Generator backend.
-	
-`REACT_APP_CACHE_REFRESH_HOURS` - This `env` variable controls whether to fetch data from warehouse or read from cache files, set this high to make the UI responsive      
-
-`npm run build` - This command builds the app for production to the `build` folder.
-
-⚠️ Pass the `env` variables, so that the Craco build picks them up before packaging.
+⚠️ **Important**: The interface for the RudderStack Query Generator is bootstrapped with [Craco](https://github.com/gsoft-inc/craco). Make sure you pass the `env` variables, so that the Craco build picks them up before packaging.
 
 
-### ⚡️ RudderStack Query Generator Demo
+## ⚡️ RudderStack Query Generator Demo
 
 ![Query Generator Demo 1](https://user-images.githubusercontent.com/59817155/90628835-f0419880-e23b-11ea-88db-a83288d265a6.gif)
-
 
 Here is how you can generate a query by adding the **Users** filter:
 
 ![Query Generator Demo 2](https://user-images.githubusercontent.com/59817155/90628927-16673880-e23c-11ea-8e9d-5786a1f39c28.gif)
-
 
 You can then copy the queries and run them on your warehouse data to get the desired results!
 
