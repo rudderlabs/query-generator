@@ -18,9 +18,9 @@ We aim to address this challenge for the RudderStack-specific data by providing 
 
 The RudderStack Query Generator has the following workflow:
 
-- Pre-populates the list of RudderStack events and their associated properties present in the data warehouse
-- Retrieves the list of events and their properties based on the filtering conditions set by you through the UI
-- Automatically generates the SQL query based on the user-specified filters, which you can run on your data warehouse to obtain the required data
+- Pre-populates the list of RudderStack events and their associated properties present in the data warehouse.
+- Retrieves the list of events and their properties based on the filtering conditions set by you through the UI.
+- Automatically generates the SQL query based on the user-specified filters. You can then run the query on your data warehouse to obtain the required data.
 
 ## ⚡️ How to Use the RudderStack Query Generator
 
