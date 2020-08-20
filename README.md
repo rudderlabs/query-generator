@@ -24,7 +24,7 @@ The RudderStack Query Generator has the following workflow:
 
 ## ⚡️ How to Use the RudderStack Query Generator
 
-### Step 1: Start the Backend Server
+### Step 1: Start the Backend Node.js Server
 
 - Clone this repository
 - Start the Node.js server and run the following command from the local repository root:
@@ -34,6 +34,8 @@ cd api; npm start
 ```
 
 ⚠️ **Note**: All the sample input JSON files are placed under `api/data`.
+
+📘 To know more about how the backend server works, or how the event data information is pre-populated for query generation, check out our [Wiki]()
 
 ### Step 2: Start the Frontend App
 
@@ -57,13 +59,13 @@ The above command runs the app in the development mode.
 - `EACT_APP_PASSWORD` - Specify the warehouse account password
 - `REACT_APP_CACHE_REFRESH_HOURS` - This variable determines whether to fetch the data from the data warehouse or read from the cached files. **Set a higher value here to make the UI more responsive**
 
-⚠️ **Important**: The interface for the RudderStack Query Generator is bootstrapped with [Craco](https://github.com/gsoft-inc/craco). To build the app for production to the `build` folder, run the following command:
+⚠️ **Important**: To build the app for production to the `build` folder, run the following command:
 
 ```
 npm run build
 ```
 
-Make sure you pass the `env` variables, so that the Craco build picks them up before packaging.
+The interface for the RudderStack Query Generator is bootstrapped with [Craco](https://github.com/gsoft-inc/craco). Make sure you pass the `env` variables, so that the Craco build picks them up before packaging.
 
 
 ## ⚡️ RudderStack Query Generator Demo
