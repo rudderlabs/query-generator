@@ -2,20 +2,25 @@
 
 RudderStack is an open-source Segment alternative for collecting, storing and routing customer event data securely to your data warehouse and dozens of other tools. Read more about RudderStack [here](https://github.com/rudderlabs/rudder-server).
 
-The **RudderStack Query Generator** generates SQL queries for you by leveraging your warehouse data populated by [Rudderstack](https://rudderstack.com). You can then run these queries on your data warehouse to obtain the data that can be used for further analysis and insight generation.
+## ⚡️ Why We Built This App
+One of the primary aims of collecting the event data is to persist it in a data warehouse with the intent of performing analytics. However, this analytics can involve writing technically complex SQL queries - which might pose a challenge for non-technical business users. 
 
-## ⚡️Key Features
-✓ No manual coding required, saving your time and effort <br>
-✓ Easy to use interface for generating the queries <br>
-✓ Fully tested for Redshift and Snowflake, but works with all the other data warehouses as well <br>
+We aim to address this challenge for the RudderStack-specific data by providing a **query generator** tool that accepts user input through an **intuitive interface**. It then generates SQL queries by **leveraging your warehouse data** populated by [Rudderstack](https://rudderstack.com) for further analytics.
 
-## ⚡️How It Works
+✔️ **Note**: As of this writing, the RudderStack warehouse schema is compatible with Segment. Hence, this tool can be applied to the downstream data warehouses where the Segment event data has been persisted.
+
+
+## ⚡️ Key Features
+* Easy-to-use interface for generating the queries <br>
+* Fully tested for Snowflake; support for Redshift and other data warehouses is under development <br>
+
+## ⚡️ How It Works
 
 The RudderStack Query Generator has the following workflow:
 
 - Pre-populates the list of RudderStack events and their associated properties present in the data warehouse
 - Retrieves the list of events and their properties based on the filtering conditions set by you through the UI
-- Automatically generates the SQL query based on the user-specified filters, which can be run on your data warehouse to obtain the required data
+- Automatically generates the SQL query based on the user-specified filters, which you can run on your data warehouse to obtain the required data
 
 ## ⚡️ How to Use the RudderStack Query Generator
 
