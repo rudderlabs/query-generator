@@ -36,7 +36,7 @@ cd api; npm start
 > ✔️ **Note**: All the sample input JSON files are placed under `api/data`.
 <br>
 
-> ✔️ To know more about how the backend server works, or how the events are pre-populated for query generation, check out our [Wiki]().
+> ✔️ To know more about how the backend server works, how to operate the backend server in the standalone mode, or how the events are pre-populated for query generation, check out our [Wiki](https://github.com/rudderlabs/query-generator/wiki).
 <br>
 
 ### Step 2: Start the Frontend App
@@ -48,6 +48,7 @@ cd api; npm start
 * Then, run the following command:
 
 `REACT_APP_QUERY_GEN_BACKEND_URL=<SERVER_URL> REACT_APP_WH=<SNOWFLAKE/REDSHIFT> REACT_APP_DATABASE=<WAREHOUSE_DB_NAME>  REACT_APP_SCHEMA=<WAREHOUSE_SCHEMA_NAME> REACT_APP_ACCOUNT=<WAREHOUSE_ACCOUNT_URL> REACT_APP_USERNAME=<WAREHOUSE_ACCOUNT_NAME> REACT_APP_PASSWORD=<WAREHOUSE_ACCOUNT_PASSWORD> REACT_APP_CACHE_REFRESH_HOURS=<INTERVAL_BETWEEN_LAST_UPDATED_TIME_OF_PREPOPULATED_FILE_AND_NOW> npm start`
+<br>
 
 > ⚠️ **Important**: The above command runs the app in the development mode.
 <br>
@@ -63,8 +64,10 @@ The environment variables are:
 - `REACT_APP_USERNAME` - Specify the warehouse account username
 - `REACT_APP_PASSWORD` - Specify the warehouse account password
 - `REACT_APP_CACHE_REFRESH_HOURS` - This variable determines whether to fetch the data from the data warehouse or read from the cached files. **Set a higher value here to make the UI more responsive**
+<br>
 
 > ✔️ **Note**: The frontend app passes the variables needed by backend to make the warehouse connection and fetch the schema, column and row values from the respective event tables and cache them locally for future lookups via the frontend.
+<br>
 
 To build the app for production to the `build` folder, run the following command:
 
@@ -73,7 +76,7 @@ npm run build
 ```
 
 The interface for the RudderStack Query Generator is bootstrapped with [Craco](https://github.com/gsoft-inc/craco). Make sure you pass the `env` variables, so that the Craco build picks them up before packaging.
-
+<br>
 
 ## ⚡️ RudderStack Query Generator Demo
 
