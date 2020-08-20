@@ -48,7 +48,7 @@ cd api; npm start
 * Then, run the following command:
 
 `REACT_APP_QUERY_GEN_BACKEND_URL=<SERVER_URL> REACT_APP_WH=<SNOWFLAKE/REDSHIFT> REACT_APP_DATABASE=<WAREHOUSE_DB_NAME>  REACT_APP_SCHEMA=<WAREHOUSE_SCHEMA_NAME> REACT_APP_ACCOUNT=<WAREHOUSE_ACCOUNT_URL> REACT_APP_USERNAME=<WAREHOUSE_ACCOUNT_NAME> REACT_APP_PASSWORD=<WAREHOUSE_ACCOUNT_PASSWORD> REACT_APP_CACHE_REFRESH_HOURS=<INTERVAL_BETWEEN_LAST_UPDATED_TIME_OF_PREPOPULATED_FILE_AND_NOW> npm start`
-<br>
+<br><br>
 
 > ⚠️ **Important**: The above command runs the app in the development mode.
 <br>
@@ -63,7 +63,7 @@ The environment variables are:
 - `REACT_APP_ACCOUNT` - Specify the warehouse account URL
 - `REACT_APP_USERNAME` - Specify the warehouse account username
 - `REACT_APP_PASSWORD` - Specify the warehouse account password
-- `REACT_APP_CACHE_REFRESH_HOURS` - This variable determines whether to fetch the data from the data warehouse or read from the cached files. **Set a higher value here to make the UI more responsive**
+- `REACT_APP_CACHE_REFRESH_HOURS` - This variable determines whether to fetch the data from the data warehouse or read from the cached files. **Set a higher value here to make the UI more responsive**.
 <br>
 
 > ✔️ **Note**: The frontend app passes the variables needed by backend to make the warehouse connection and fetch the schema, column and row values from the respective event tables and cache them locally for future lookups via the frontend.
