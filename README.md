@@ -4,6 +4,11 @@ RudderStack is an open-source Segment alternative for collecting, storing and ro
 
 The **RudderStack Query Generator** generates SQL queries for you by leveraging your warehouse data populated by [Rudderstack](https://rudderstack.com). You can then run these queries on your data warehouse to obtain the data that can be used for further analysis and insight generation.
 
+## ⚡️Key Features
+✓ No manual coding required, saving your time and effort <br>
+✓ Easy to use interface for generating the queries <br>
+✓ Fully tested for Redshift and Snowflake, but works with all the other data warehouses as well <br>
+
 ## ⚡️How It Works
 
 The RudderStack Query Generator has the following workflow:
@@ -11,11 +16,6 @@ The RudderStack Query Generator has the following workflow:
 - Pre-populates the list of RudderStack events and their associated properties present in the data warehouse
 - Retrieves the list of events and their properties based on the filtering conditions set by you through the UI
 - Automatically generates the SQL query based on the user-specified filters, which can be run on your data warehouse to obtain the required data
-
-## ⚡️Key Features
-✓ No manual coding required, saving your time and effort <br>
-✓ Easy to use interface for generating the queries <br>
-✓ Fully tested for Redshift and Snowflake, but works with all the other data warehouses as well <br>
 
 ## ⚡️ How to Use the RudderStack Query Generator
 
