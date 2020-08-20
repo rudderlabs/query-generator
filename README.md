@@ -35,8 +35,8 @@ cd api; npm start
 
 > ✔️ **Note**: All the sample input JSON files are placed under `api/data`.
 <br>
-<br>
-> 📘 To know more about how the backend server works, or how the events are pre-populated for query generation, check out our [Wiki]().
+
+> ✔️ To know more about how the backend server works, or how the events are pre-populated for query generation, check out our [Wiki]().
 <br>
 
 ### Step 2: Start the Frontend App
