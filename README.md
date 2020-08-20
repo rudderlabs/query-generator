@@ -33,9 +33,10 @@ The RudderStack Query Generator has the following workflow:
 cd api; npm start
 ```
 
-> ✔️ **Note**: All the sample input JSON files are placed under `api/data`.<br>
-
-📘 To know more about how the backend server works, or how the events are pre-populated for query generation, check out our [Wiki]().
+> ✔️ **Note**: All the sample input JSON files are placed under `api/data`.
+<br>
+<br>
+> 📘 To know more about how the backend server works, or how the events are pre-populated for query generation, check out our [Wiki]().
 <br>
 
 ### Step 2: Start the Frontend App
@@ -65,7 +66,7 @@ The environment variables are:
 
 > ✔️ **Note**: The frontend app passes the variables needed by backend to make the warehouse connection and fetch the schema, column and row values from the respective event tables and cache them locally for future lookups via the frontend.
 
-> ⚠️ **Important**: To build the app for production to the `build` folder, run the following command:
+To build the app for production to the `build` folder, run the following command:
 
 ```
 npm run build
