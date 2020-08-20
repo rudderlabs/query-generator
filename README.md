@@ -33,7 +33,7 @@ The RudderStack Query Generator has the following workflow:
 cd api; npm start
 ```
 
-⚠️ **Note**: All the sample input JSON files are placed under `api/data`.<br>
+✔️ **Note**: All the sample input JSON files are placed under `api/data`.<br>
 
 📘 To know more about how the backend server works, or how the events are pre-populated for query generation, check out our [Wiki]().
 <br>
@@ -48,17 +48,21 @@ cd api; npm start
 
 `REACT_APP_QUERY_GEN_BACKEND_URL=<SERVER_URL> REACT_APP_WH=<SNOWFLAKE/REDSHIFT> REACT_APP_DATABASE=<WAREHOUSE_DB_NAME>  REACT_APP_SCHEMA=<WAREHOUSE_SCHEMA_NAME> REACT_APP_ACCOUNT=<WAREHOUSE_ACCOUNT_URL> REACT_APP_USERNAME=<WAREHOUSE_ACCOUNT_NAME> REACT_APP_PASSWORD=<WAREHOUSE_ACCOUNT_PASSWORD> REACT_APP_CACHE_REFRESH_HOURS=<INTERVAL_BETWEEN_LAST_UPDATED_TIME_OF_PREPOPULATED_FILE_AND_NOW> npm start`
 
-The above command runs the app in the development mode. 
+⚠️ **Important**: The above command runs the app in the development mode.
 
 ![Step 2](https://user-images.githubusercontent.com/59817155/90635003-3b60a900-e246-11ea-81a1-39a01cb712d1.PNG)
 
+The environment variables are:
+
 - `REACT_APP_QUERY_GEN_BACKEND_URL` - The Query Generator backend runs on this URL
-- `REACT_APP_DATABASE` - Name of the Warehouse database goes here
+- `REACT_APP_DATABASE` - Name of the warehouse database goes here
 - `REACT_APP_SCHEMA` - Name of the warehouse schema goes here
 - `REACT_APP_ACCOUNT` - Specify the warehouse account URL
 - `REACT_APP_USERNAME` - Specify the warehouse account username
 - `EACT_APP_PASSWORD` - Specify the warehouse account password
 - `REACT_APP_CACHE_REFRESH_HOURS` - This variable determines whether to fetch the data from the data warehouse or read from the cached files. **Set a higher value here to make the UI more responsive**
+
+✔️ **Note**: The frontend app passes the variables needed by backend to make the warehouse connection and fetch the schema, column and row values from the respective event tables and cache them locally for future lookups via the frontend.
 
 ⚠️ **Important**: To build the app for production to the `build` folder, run the following command:
 
