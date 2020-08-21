@@ -1,17 +1,19 @@
-# RudderStack Query Generator
+# Event Query Generator
 
-RudderStack is an open-source Segment alternative for collecting, storing and routing customer event data securely to your data warehouse and dozens of other tools. Read more about RudderStack [here](https://github.com/rudderlabs/rudder-server).
+The Event Query Generator is a tool that allows you to seamlessly navigate through the warehouse event schema through an intuitive UI, and generate complex SQL queries to interact with your customer event data.
 
-## ⚡️ Why We Built This App
-One of the primary aims of collecting the event data is to persist it in a data warehouse with the intent of performing analytics. However, this analytics can involve writing technically complex SQL queries - which might pose a challenge for non-technical business users. 
+## ⚡️ What is the Event Query Generator?
 
-We aim to address this challenge for the RudderStack-specific data by providing a **query generator** tool that accepts user input through an **intuitive interface**. It then generates SQL queries by **leveraging your warehouse data** populated by [Rudderstack](https://rudderstack.com) for further analytics.
+Businesses collect the event data and persist it in a data warehouse with the intent of performing analytics, which generally involves writing complex SQL queries. To generate these SQL queries, you also need access to a lot of implicit information within the event data, such as the different events and their attributes.
+
+With the query generator tool, you can easily navigate through the event schema through an easy-to-use interface. You can specify the data filtering conditions through the UI, and the tool generates the SQL queries. You can then run these queries on your warehouse to obtain the required data.
 
 > ✔️ **Note**: As of this writing, the RudderStack warehouse schema is compatible with Segment. Hence, this tool can be applied to the downstream data warehouses where the Segment event data has been persisted.
 
 
 ## ⚡️ Key Features
 * Easy-to-use interface for generating the queries <br>
+* Caches data from the warehouse for better performance<br>
 * Fully tested for Snowflake; support for Redshift and other data warehouses is under development <br>
 
 ## ⚡️ How It Works
@@ -27,7 +29,7 @@ The RudderStack Query Generator has the following workflow:
 ### Step 1: Start the Backend Node.js Server
 
 - Clone this repository
-- Start the Node.js server and run the following command from the local repository root:
+- Start the Node.js server by running the following command from the local repository root:
 
 ```
 cd api; npm start
@@ -89,7 +91,11 @@ Here is how you can generate a query by adding the **Users** filter:
 You can then copy the queries and run them on your warehouse data to get the desired results!
 
 ![Queries Output](https://user-images.githubusercontent.com/59817155/90628949-21ba6400-e23c-11ea-83cb-9c600ce6bf79.gif)
+<br>
 
+## ⚡️ What is RudderStack?
+
+RudderStack is an open-source Segment alternative for collecting, storing and routing customer event data securely to your data warehouse and dozens of other tools. Read more about RudderStack [here](https://github.com/rudderlabs/rudder-server).
 
 ## 👉 Contact Us
 
