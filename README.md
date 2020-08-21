@@ -18,13 +18,13 @@ With the query generator tool, you can easily navigate through the event schema 
 
 ## ⚡️ How It Works
 
-The RudderStack Query Generator has the following workflow:
+The Event Query Generator has the following workflow:
 
-- Pre-populates the list of RudderStack events and their associated properties present in the data warehouse.
+- Pre-populates the list of events and their associated properties present in the data warehouse.
 - Retrieves the list of events and their properties based on the filtering conditions set by you through the UI.
 - Automatically generates the SQL query based on the user-specified filters. You can then run the query on your data warehouse to obtain the required data.
 
-## ⚡️ How to Use the RudderStack Query Generator
+## ⚡️ How to Use the Event Query Generator
 
 ### Step 1: Start the Backend Node.js Server
 
@@ -77,10 +77,10 @@ To build the app for production to the `build` folder, run the following command
 npm run build
 ```
 
-The interface for the RudderStack Query Generator is bootstrapped with [Craco](https://github.com/gsoft-inc/craco). Make sure you pass the `env` variables, so that the Craco build picks them up before packaging.
+The interface for the Event Query Generator is bootstrapped with [Craco](https://github.com/gsoft-inc/craco). Make sure you pass the `env` variables, so that the Craco build picks them up before packaging.
 <br>
 
-## ⚡️ RudderStack Query Generator Demo
+## ⚡️ Event Query Generator Demo
 
 ![Query Generator Demo 1](https://user-images.githubusercontent.com/59817155/90628835-f0419880-e23b-11ea-88db-a83288d265a6.gif)
 
@@ -99,7 +99,7 @@ RudderStack is an open-source Segment alternative for collecting, storing and ro
 
 ## 👉 Contact Us
 
-For more information on the RudderStack Query Generator, feel free to reach out to us on any of the platforms below:
+For more information on the Event Query Generator, feel free to reach out to us on any of the platforms below:
 - [Discord](https://discordapp.com/invite/xNEdEGw)
 - [Twitter](https://twitter.com/rudderstack)
 - [LinkedIn](https://www.linkedin.com/company/rudderlabs/)
