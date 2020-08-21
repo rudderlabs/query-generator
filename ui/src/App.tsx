@@ -157,8 +157,8 @@ export class App extends React.Component<any, IAppState> {
 
     let queryData: any = {};
     queryData["query"] = "event_segmentation";
-    queryData["database"] = "rudder_webapp_data";
-    queryData["schema"] = "rudderwebapp";
+    queryData["database"] = process.env.REACT_APP_DATABASE;
+    queryData["schema"] = process.env.REACT_APP_SCHEMA;
     queryData["events"] = [...eventRows];
     queryData["user_filter"] = [...userRows];
 
