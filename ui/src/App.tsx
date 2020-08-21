@@ -132,6 +132,14 @@ export class App extends React.Component<any, IAppState> {
         filterObj["target_value"] = whereClause.propertyValue;
         filters.push(filterObj);
       });
+      if(eventRow.rowState.whereClauses.length == 0) {
+        let filterObj: any = {};
+        filterObj["field"] = "event";
+        filterObj["type"] = "string"; // hardcoding it for now
+        filterObj["operator"] = "=";
+        filterObj["target_value"] = eventRow.rowState.eventSelected;
+        filters.push(filterObj);
+      }
 
       eventRow.rowState.groupClauses.map((groupClause) => {
         groupBy.push(groupClause.property);
