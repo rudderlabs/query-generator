@@ -6,13 +6,13 @@ The Event Query Generator is a tool that allows you to seamlessly navigate throu
 
 Businesses collect the event data and persist it in a data warehouse with the intent of performing analytics, which generally involves writing complex SQL queries. To generate these SQL queries, you also need access to a lot of implicit information within the event data, such as the different events and their attributes.
 
-With the query generator tool, you can easily navigate through the event schema through an easy-to-use interface. You can specify the data filtering conditions through the UI, and the tool generates the SQL queries. You can then run these queries on your warehouse to obtain the required data.
+With the query generator tool, you can navigate through the event schema through an easy-to-use interface. You can specify the data filtering conditions through the UI, and the tool generates the SQL queries. You can then run these queries on your warehouse to obtain the required data.
 
-> ✔️ **Note**: As of this writing, the RudderStack warehouse schema is compatible with Segment. Hence, this tool can be applied to the downstream data warehouses where the Segment event data has been persisted.
+> ✔️ **Note**: As of this writing, the RudderStack warehouse schema is compatible with Segment. Hence, this tool can be applied to the downstream data warehouses where the Segment event data is persisted.
 
 
 ## ⚡️ Key Features
-* Easy-to-use interface for generating the queries <br>
+* Simple, easy-to-use interface for generating the queries <br>
 * Caches data from the warehouse for better performance<br>
 * Fully tested for Snowflake; support for Redshift and other data warehouses is under development <br>
 
