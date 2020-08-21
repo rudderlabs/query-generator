@@ -34,7 +34,11 @@ The Event Query Generator has the following workflow:
 ```
 cd api; npm install; npm start
 ```
-[![asciicast](https://asciinema.org/a/kG0ns8oFDJ8yJhKCvRWflhtBW.svg)](https://asciinema.org/a/kG0ns8oFDJ8yJhKCvRWflhtBW)
+
+Here's a short demo:<br>
+
+![Node.js Server](https://user-images.githubusercontent.com/59817155/90860740-2dc33480-e3a8-11ea-91c9-f1e858558327.gif)
+<br>
 
 > ✔️ **Note**: All the sample input JSON files are placed under `api/data`.
 <br>
