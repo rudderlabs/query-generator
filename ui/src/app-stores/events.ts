@@ -9,6 +9,12 @@ export interface IEventStore {
     fetchEvents():  Promise<unknown>;
 }
 
+
+
+const warehouse:string = process.env.REACT_APP_WH || 'SNOWFLAKE'
+const eventIndex = warehouse == 'SNOWFLAKE' ? 'EVENT' : 'event'
+
+
 export class EventStore implements IEventStore {
     @observable events: IEvent[];
     eventCount: number;  
@@ -32,18 +38,24 @@ export class EventStore implements IEventStore {
     async fetchEvents() : Promise<unknown> {
         return new Promise(resolve => {
             fetchService().post("/getevents", {
-                "database": "dev",
-                "schema": "unity_prod",
-                "cache_refresh_hours": 200}).then((res) => {
+                "database": process.env.REACT_APP_DATABASE, //"dev",
+                "schema": process.env.REACT_APP_SCHEMA, //"unity_prod",
+                "account": process.env.REACT_APP_ACCOUNT,
+                "username": process.env.REACT_APP_USERNAME,
+                "password": process.env.REACT_APP_PASSWORD,
+                "cache_refresh_hours": process.env.REACT_APP_CACHE_REFRESH_HOURS}).then((res) => {
                     let eventData: any[] = res.data;
                     this.events = [];
                     eventData.map(event => {
                         //this.events.push(new Event(event['EVENT'],"events"));
-                        this.events.push(new Event(event['event'],"events"));
+                        this.events.push(new Event(event[eventIndex],"events"));
                     })
 
                     resolve()
                    
+                }).catch((error) => {
+                    this.events.push(new Event("Unable to fetch values","events"));
+                    resolve()
                 })
 
         })

@@ -2,6 +2,8 @@ import {IVal, EventPropValue} from './values';
 import fetchService from '../services/fetchservice';
 import { IEvent } from './event';
 
+const warehouse:string = process.env.REACT_APP_WH || 'SNOWFLAKE'
+
 export interface IProp {
     name: string,
     event: string,
@@ -19,26 +21,38 @@ export class EventProperties implements IProp {
         this.values = [];
         this.event = event;
     }
+
+    getValueIndex(): string {
+       return warehouse == 'SNOWFLAKE' ?  this.name.toUpperCase() : this.name
+    }
     
     async fetchValues() {
         console.log("=====fetching property values for event of type=====", this.event)
         return new Promise(resolve => {
             fetchService().post("/geteventpropertyvalues", {
-                "database": "dev",
-	            "schema": "unity_prod",
+                "database": process.env.REACT_APP_DATABASE, //"dev",
+                "schema": process.env.REACT_APP_SCHEMA, //"unity_prod",
+                "account": process.env.REACT_APP_ACCOUNT,
+                "username": process.env.REACT_APP_USERNAME,
+                "password": process.env.REACT_APP_PASSWORD,
                 "event": this.event,
                 "property": this.name,
-                "cache_refresh_hours": 200
+                "cache_refresh_hours": process.env.REACT_APP_CACHE_REFRESH_HOURS
             }).then((res) => {
                     let valuesData: any[] = res.data;
                     this.values = [];
                     valuesData.map(value => {
                         //this.values.push(new EventPropValue(value[this.name.toUpperCase()]));
-                        this.values.push(new EventPropValue(value[this.name]));
+                        this.values.push(new EventPropValue(value[this.getValueIndex()]));
                     })
+
+                    this.values.push(new EventPropValue("none"))
 
                     resolve()
                    
+                }).catch((error) => {
+                    this.values.push(new EventPropValue("none"))
+                    resolve()
                 })
 
         })

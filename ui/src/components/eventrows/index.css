@@ -1,5 +1,76 @@
 .box {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 6px
-  }
+  display: flex;
+  flex-flow: row wrap;
+  gap: 6px;
+}
+
+.event-rows {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-top: 23px;
+  padding-left: 18px;
+  padding-top: 16px;
+  display: flex;
+  flex-flow: column;
+}
+
+.where-group-content {
+  display: flex;
+  flex-flow: row;
+}
+
+
+/* margin-left: 32px; */
+.add-text {
+  margin-right: 8px;
+  margin-top: 32px;
+  margin-bottom: 31px;
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.where-button {
+  margin-right: 9px;
+  margin-top: 28px;
+  margin-bottom: 31px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  color: #6d0fa7;
+}
+
+.or-text {
+  margin-right: 7px;
+  margin-top: 32px;
+  margin-bottom: 31px;
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.group-button {
+  margin-top: 28px;
+  margin-bottom: 31px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  color: #6d0fa7;
+}
+
+.event-select {
+  display: flex;
+  flex-flow: row;
+  margin-bottom: 32px;
+}
+
+.ant-select-show-search.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  cursor: pointer !important;
+}
+
+/* .event-rows {
+  padding-left: 18px;
+  padding-top: 16px;
+} */
