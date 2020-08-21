@@ -29,7 +29,7 @@ The Event Query Generator has the following workflow:
 ### Step 1: Start the Backend Node.js Server
 
 - Clone this repository
-- Start the Node.js server by running the following command from the local repository root:
+- Start the Node.js server by running the following commands from the local repository root:
 
 ```
 cd api; npm install; npm start
