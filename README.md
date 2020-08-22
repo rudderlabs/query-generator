@@ -6,9 +6,9 @@ The Event Query Generator is a tool that allows you to seamlessly navigate throu
 
 Businesses collect the event data and persist it in a data warehouse with the intent of performing analytics, which generally involves writing complex SQL queries. The users face two major challenges in doing so:
 
-- To generate these SQL queries, they need access to a lot of implicit information within the event data, such as the different events and their attributes. Getting easy access to this information within the data warehouse can be quite a challenge.
+- To generate these SQL queries, they need access to a lot of implicit information within the event data, such as different events and their attributes. Getting easy access to this information within the data warehouse can be quite a challenge.
 
-- Customer Data Platforms like RudderStack and Segment dump the data in the warehouse in a specific format. We noticed that our customers often run a similar set of queries for their use-cases, e.g event analytics, funnel analytics etc. Some of these queries can be quite tricky to write - you need to find out the column names, join multiple tables, etc.
+- Customer Data Platforms like RudderStack and Segment dump the data in the warehouse in a specific format. We noticed that our customers often run a similar set of queries on this data for their use-cases, e.g event analytics, funnel analytics etc. Some of these queries can be quite tricky to write - you need to find out the column names, join multiple tables, etc.
 
 We built the **Event Query Generator** to address these challenges. With this tool, you can navigate through the event schema through an easy-to-use interface. You can specify the data filtering conditions through the UI, and the tool generates the SQL queries. You can then run these queries on your warehouse to obtain the required data.
 <br>
@@ -54,12 +54,12 @@ Here's a short demo:<br>
 > ✔️ To know more about how the backend server works, how to operate the backend server in the standalone mode, or how the events are pre-populated for query generation, check out our [Wiki](https://github.com/rudderlabs/query-generator/wiki).
 <br>
 
-### Step 2: Start the Frontend App
+### Step 2: Start the Front-end App
 
 * First, install the necessary dependencies for the app by running the following commands:
 
 ```
-cd api; npm i
+cd ui; npm i
 ```
 
 ![Step 1](https://user-images.githubusercontent.com/59817155/90634896-15d39f80-e246-11ea-836f-c9e6d2df9782.PNG)
@@ -85,7 +85,7 @@ The environment variables are:
 - `REACT_APP_CACHE_REFRESH_HOURS` - This variable determines whether to fetch the data from the data warehouse or read from the cached files. **Set a higher value here to make the UI more responsive**.
 <br>
 
-> ✔️ **Note**: The frontend app passes the variables needed by backend to make the warehouse connection and fetch the schema, column and row values from the respective event tables and cache them locally for future lookups via the frontend.
+> ✔️ **Note**: The front-end app passes the variables needed by backend to make the warehouse connection and fetch the schema, column and row values from the respective event tables and cache them locally for future lookups via the front-end.
 <br>
 
 To build the app for production to the `build` folder, run the following command:
