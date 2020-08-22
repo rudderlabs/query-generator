@@ -4,9 +4,17 @@ The Event Query Generator is a tool that allows you to seamlessly navigate throu
 
 ## ⚡️ What is the Event Query Generator?
 
-Businesses collect the event data and persist it in a data warehouse with the intent of performing analytics, which generally involves writing complex SQL queries. To generate these SQL queries, you also need access to a lot of implicit information within the event data, such as the different events and their attributes.
+Businesses collect the event data and persist it in a data warehouse with the intent of performing analytics, which generally involves writing complex SQL queries. The users face two major challenges in doing so:
 
-With the query generator tool, you can navigate through the event schema through an easy-to-use interface. You can specify the data filtering conditions through the UI, and the tool generates the SQL queries. You can then run these queries on your warehouse to obtain the required data.
+- To generate these SQL queries, they need access to a lot of implicit information within the event data, such as the different events and their attributes. Getting easy access to this information within the data warehouse can be quite a challenge.
+
+- Customer Data Platforms like RudderStack and Segment dump the data in the warehouse in a specific format. We noticed that our customers often run a similar set of queries for their use-cases, e.g event analytics, funnel analytics etc. Some of these queries can be quite tricky to write - you need to find out the column names, join multiple tables, etc.
+
+We built the **Event Query Generator** to address these challenges. With this tool, you can navigate through the event schema through an easy-to-use interface. You can specify the data filtering conditions through the UI, and the tool generates the SQL queries. You can then run these queries on your warehouse to obtain the required data.
+<br>
+
+### See the Event Query Generator in Action:  https://query-gen-app.dev.rudderlabs.com/
+<br>
 
 > ✔️ **Note**: As of this writing, the RudderStack warehouse schema is compatible with Segment. Hence, this tool can be applied to the downstream data warehouses where the Segment event data is persisted.
 
@@ -48,7 +56,11 @@ Here's a short demo:<br>
 
 ### Step 2: Start the Frontend App
 
-* First, install the necessary dependencies for the app by running the `npm i` command, as shown:
+* First, install the necessary dependencies for the app by running the following commands:
+
+```
+cd api; npm i
+```
 
 ![Step 1](https://user-images.githubusercontent.com/59817155/90634896-15d39f80-e246-11ea-836f-c9e6d2df9782.PNG)
 
