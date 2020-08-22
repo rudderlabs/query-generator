@@ -13,7 +13,7 @@ Businesses collect the event data and persist it in a data warehouse with the in
 We built the **Event Query Generator** to address these challenges. With this tool, you can navigate through the event schema through an easy-to-use interface. You can specify the data filtering conditions through the UI, and the tool generates the SQL queries. You can then run these queries on your warehouse to obtain the required data.
 <br>
 
-### See the Event Query Generator in Action:  https://query-gen-app.dev.rudderlabs.com/
+**See the Event Query Generator in Action:  https://query-gen-app.dev.rudderlabs.com/**
 <br>
 
 > ✔️ **Note**: As of this writing, the RudderStack warehouse schema is compatible with Segment. Hence, this tool can be applied to the downstream data warehouses where the Segment event data is persisted.
