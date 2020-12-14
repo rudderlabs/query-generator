@@ -117,6 +117,6 @@ RudderStack is an open-source Segment alternative for collecting, storing and ro
 ## 👉 Contact Us
 
 For more information on the Event Query Generator, feel free to reach out to us on any of the platforms below:
-- [Discord](https://discordapp.com/invite/xNEdEGw)
+- [Slack](https://resources.rudderstack.com/join-rudderstack-slack)
 - [Twitter](https://twitter.com/rudderstack)
 - [LinkedIn](https://www.linkedin.com/company/rudderlabs/)
