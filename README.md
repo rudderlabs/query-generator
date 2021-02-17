@@ -1,3 +1,9 @@
+# What is RudderStack?
+
+[RudderStack](https://rudderstack.com/) is a **customer data pipeline** tool for collecting, routing and processing data from your websites, apps, cloud tools, and data warehouse.
+
+More information on RudderStack can be found [here](https://github.com/rudderlabs/rudder-server).
+
 # Event Query Generator
 
 The Event Query Generator is a tool that allows you to seamlessly navigate through the warehouse event schema through an intuitive UI, and generate complex SQL queries to interact with your customer event data.
@@ -117,6 +123,7 @@ RudderStack is an open-source Segment alternative for collecting, storing and ro
 ## 👉 Contact Us
 
 For more information on the Event Query Generator, feel free to reach out to us on any of the platforms below:
+
 - [Slack](https://resources.rudderstack.com/join-rudderstack-slack)
 - [Twitter](https://twitter.com/rudderstack)
 - [LinkedIn](https://www.linkedin.com/company/rudderlabs/)
