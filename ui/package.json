@@ -16,7 +16,7 @@
     "mobx-react": "^6.2.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "sql-formatter": "^2.3.3",
     "styled-components": "^5.1.1",
     "typescript": "~3.7.2"
